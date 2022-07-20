@@ -23,7 +23,8 @@ namespace PL
     public partial class MainWindow : Window
     {
         FlightInfoPartial SelectedFlight = null; //Selected Flight
-        IBL bl = new BLImp();
+
+         VM.ViewModel vm =new VM.ViewModel();
 
         public MainWindow()
         {
@@ -35,8 +36,8 @@ namespace PL
         {
             //load current data
             // this.DataContext = FlightKeys;
-            InFlightsListBox.DataContext = bl.GetCurrentInComingFlights();
-            OutFlightsListBox.DataContext = bl.GetCurrentOutGoingFlights();
+            InFlightsListBox.DataContext = vm.deleteNullFromList("incoming");
+            OutFlightsListBox.DataContext =vm.deleteNullFromList("outgoing");
 
         }
 
