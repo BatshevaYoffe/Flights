@@ -2,6 +2,7 @@
 using FlightModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,17 @@ namespace PL.VM
                 list= bl.GetCurrentInComingFlights();   
             if (category == "outgoing")
                list= bl.GetCurrentOutGoingFlights();
-
-            foreach(FlightInfoPartial flight in list)
+            try
             {
-                if (flight.FlightCode == " ")
-                    list.Remove(flight);
+                foreach (FlightInfoPartial flight in list)
+                {
+                    if (flight.FlightCode == "" ||flight.Destination=="")
+                        list.Remove(flight);
+
+                }
+            }catch(Exception e)
+            {
+                Debug.Print(e.Message);
             }
             return list;
             
