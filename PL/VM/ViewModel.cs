@@ -2,6 +2,7 @@
 using FlightModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,22 @@ using System.Threading.Tasks;
 
 namespace PL.VM
 {
-    public class ViewModel
+    public class ViewModel : INotifyPropertyChanged
     {
         IBL bl = new BLImp();
+
+        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public List<FlightInfoPartial> deleteNullFromList(string category)
         {
