@@ -29,14 +29,14 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-
-
-        <Label Content="Incoming" HorizontalAlignment="Left" Margin="30,54,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
-        <Label Content="Outgoing" HorizontalAlignment="Left" Margin="30,246,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
                Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="260,148,10,210" >
             <m:Pushpin Location="32.026245677601786, 34.88452573917502"/>
         </m:Map>
+
+        <Label Content="Incoming" HorizontalAlignment="Left" Margin="30,54,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <Label Content="Outgoing" HorizontalAlignment="Left" Margin="30,246,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
+
         <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="200" Margin="18,465,0,0">
             <TextBlock Text="{Binding identification.callsign}"></TextBlock>
             <TextBlock Text="{Binding aircraft.registration}"></TextBlock>
