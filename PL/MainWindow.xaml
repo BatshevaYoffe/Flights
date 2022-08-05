@@ -6,10 +6,17 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         mc:Ignorable="d"
+<<<<<<< HEAD
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="0,112,0,-112">
+        <Button Content="Read All" HorizontalAlignment="Left" Height="36" Margin="58,10,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click" RenderTransformOrigin="0.322,1.237"/>
+        <ListBox ItemsSource="{Binding}" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,235,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+=======
         Title="MainWindow" Height="800" Width="800">
     <Grid Margin="0,0,10,0" Height="712" VerticalAlignment="Center">
         <Button Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click" RenderTransformOrigin="0.322,1.237"/>
         <ListBox ItemsSource="{Binding}" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
+>>>>>>> 1aa2c1f29d68190bda2cda1af11ab0ebee16e607
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -18,8 +25,15 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+<<<<<<< HEAD
+
+
+        <Label Content="Flight Details" HorizontalAlignment="Left" Margin="178,15,0,0" VerticalAlignment="Top" Height="26" Width="79"/>
+        <ListBox ItemsSource="{Binding}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,67,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+=======
         <Label Content="Flight Details" HorizontalAlignment="Left" Margin="39,434,0,0" VerticalAlignment="Top" Height="26" Width="79"/>
         <ListBox ItemsSource="{Binding}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,92,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
+>>>>>>> 1aa2c1f29d68190bda2cda1af11ab0ebee16e607
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

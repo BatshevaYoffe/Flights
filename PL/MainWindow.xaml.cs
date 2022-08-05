@@ -29,7 +29,7 @@ namespace PL
 
          VM.ViewModel vm =new VM.ViewModel();
 
-        public MainWindow()
+        public MainWindow()//
         {
             InitializeComponent();
         }
