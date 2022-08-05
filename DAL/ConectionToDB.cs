@@ -14,6 +14,7 @@ namespace DAL
         {
             using (var ctx = new FlightContext())
             {
+                var f = new Flight() { Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Now };
                 var flight = new Flight() { FlightCode = flightIP.FlightCode, Source = flightIP.Source, Destination = flightIP.Destination, DateTime = flightIP.DateTime };
                 ctx.Flights.Add(flight);
                 ctx.SaveChanges();
