@@ -105,6 +105,10 @@
       <Project>{43F22FBD-1B89-44C4-AA19-6D47F3861F6E}</Project>
       <Name>BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{AE89AD69-15A8-4ED5-BA42-76CE37CC7284}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FlightModel\FlightModel.csproj">
       <Project>{2BF381C2-34E4-4AED-A46A-52808DCEF619}</Project>
       <Name>FlightModel</Name>
