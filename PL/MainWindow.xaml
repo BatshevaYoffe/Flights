@@ -32,7 +32,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-<!--
+
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
                Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="260,148,10,210" >
             <m:Pushpin Location="32.026245677601786, 34.88452573917502"/>
@@ -50,8 +50,8 @@
             <TextBlock Text="{Binding airport.origin.name}"></TextBlock>
             <TextBlock Text="{Binding airport.origin.position.country.name}"></TextBlock>
             <TextBlock Text="{Binding status.text}"></TextBlock>
-            <TextBlock Text="{Binding time.estimated.arrival,Converter={StaticResource TickConvert}}"></TextBlock>
-        </StackPanel>-->
+            <!-- <TextBlock Text="{Binding time.estimated.arrival,Converter={StaticResource TickConvert}}"></TextBlock>-->
+        </StackPanel>
 
 
     </Grid>

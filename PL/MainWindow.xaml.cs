@@ -56,7 +56,7 @@ namespace PL
             AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
             var Flight = dal.GetFlightData(selected.SourceId);
 
-            //DetailsPanel.DataContext = Flight;
+            DetailsPanel.DataContext = Flight;
 
 
 
@@ -98,10 +98,10 @@ namespace PL
                 PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
                 PinOrigin.Location = PlaneLocation;
 
-                //PinCurrent.MouseDown += Pin_MouseDown;
+                PinCurrent.MouseDown += Pin_MouseDown;
 
-                //myMap.Children.Add(PinOrigin);
-                //myMap.Children.Add(PinCurrent);
+                myMap.Children.Add(PinOrigin);
+                myMap.Children.Add(PinCurrent);
 
             }
         }
@@ -125,8 +125,8 @@ namespace PL
                     polyline.Locations.Add(new Location(item.lat, item.lng));
                 }
 
-                //myMap.Children.Clear();
-                //myMap.Children.Add(polyline);
+                myMap.Children.Clear();
+                myMap.Children.Add(polyline);
             }
         
     }
