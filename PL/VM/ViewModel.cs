@@ -50,5 +50,19 @@ namespace PL.VM
             
             
         }
+        public FlightInfo.Root VmGetFlightData(string sourceId)
+        {
+            FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
+            return Flight;  
+        }
+        public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
+        {
+            FlightInfo.Root Flight =bl.GetDataofOneFlight(sourceId);
+            List<FlightInfo.Trail>  OrderedPlaces=(from f in Flight.trail
+                                     orderby f.ts
+                                     select f).ToList<FlightInfo.Trail>();
+
+            return OrderedPlaces;
+        }
     }
 }

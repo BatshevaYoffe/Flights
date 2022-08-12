@@ -27,7 +27,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Source}"/>
+                        <TextBlock Text="{Binding FlightCode}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

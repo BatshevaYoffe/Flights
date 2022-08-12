@@ -11,6 +11,6 @@ namespace BL
     {
         List<FlightInfoPartial> GetCurrentOutGoingFlights();
         List<FlightInfoPartial> GetCurrentInComingFlights();
-
+        FlightInfo.Root GetDataofOneFlight(string SourceId);
     }
 }
