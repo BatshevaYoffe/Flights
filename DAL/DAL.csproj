@@ -68,6 +68,11 @@
       <Name>FlightModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\airplane.png" />
+    <Content Include="Images\airplaneToIsrael.png" />
+    <Content Include="Images\header__logo-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
