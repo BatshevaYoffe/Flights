@@ -14,8 +14,9 @@ namespace DAL
         {
             using (var ctx = new FlightContext())
             {
-                var f = new Flight() { Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Now };
-                var flight = new Flight() { FlightCode = flightIP.FlightCode, Source = flightIP.Source, Destination = flightIP.Destination, DateTime = flightIP.DateTime };
+                var f = new Flight() {Id=-1, Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Now };
+                var flight = new Flight() {  Id= flightIP.Id, FlightCode = flightIP.FlightCode, Source = flightIP.Source, Destination = flightIP.Destination, DateTime = flightIP.DateTime };
+                
                 ctx.Flights.Add(flight);
                 ctx.SaveChanges();
             }
@@ -44,6 +45,7 @@ namespace DAL
     }
     public class Flight
     {
+        public int Id { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
         public string FlightCode { get; set; }

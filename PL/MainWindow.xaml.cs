@@ -53,9 +53,9 @@ namespace PL
 
         private void UpdateFlight(FlightInfoPartial selected)
         {
-            AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
-            var Flight = dal.GetFlightData(selected.SourceId);
-
+             //AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
+            var Flight = vm.VmGetFlightData(selected.SourceId);
+            
             DetailsPanel.DataContext = Flight;
 
 
@@ -63,10 +63,11 @@ namespace PL
             // Update map
             if (Flight != null)
             {
-                var OrderedPlaces = (from f in Flight.trail
-                                     orderby f.ts
-                                     select f).ToList<Trail>();
+                //var OrderedPlaces = (from f in Flight.trail
+                //                     orderby f.ts
+                //                     select f).ToList<Trail>();
 
+                List < FlightInfo.Trail > OrderedPlaces = vm.OrderPlacesOfFlight(selected.SourceId);
                 addNewPolyLine(OrderedPlaces);
 
                 //MessageBox.Show(Flight.airport.destination.code.iata);

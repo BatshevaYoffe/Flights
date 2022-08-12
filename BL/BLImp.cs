@@ -21,5 +21,12 @@ namespace BL
             var FlightKeys = dal.GetCurrentFlights();
             return FlightKeys["Incoming"];
         }
+        public FlightInfo.Root GetDataofOneFlight(string SourceId)
+        {
+             return  dal.GetFlightData(SourceId);
+            
+
+
+        }
     }
 }
