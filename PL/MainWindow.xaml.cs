@@ -74,6 +74,8 @@ namespace PL
 
                 Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
                 Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
+               // Pushpin PinDestination = new Pushpin { ToolTip = Flight.airport.origin.name };
+
 
                 PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
                 MapLayer.SetPositionOrigin(PinCurrent, origin);
@@ -98,10 +100,15 @@ namespace PL
                 PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
                 PinOrigin.Location = PlaneLocation;
 
-                PinCurrent.MouseDown += Pin_MouseDown;
+                //CurrentPlace = OrderedPlaces.First<Trail>();
+                //PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
+               // PinDestination.Location = PlaneLocation;
 
+                //PinCurrent.MouseDown += Pin_MouseDown;
+                
                 myMap.Children.Add(PinOrigin);
                 myMap.Children.Add(PinCurrent);
+               // myMap.Children.Add(PinDestination);
 
             }
         }
