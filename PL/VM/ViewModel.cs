@@ -32,6 +32,7 @@ namespace PL.VM
             //ReadAll.read += ShowAllFlights;
            
         }
+       
         public void ShowAllFlights()
         {
             InComingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.InComingflights);
@@ -42,29 +43,30 @@ namespace PL.VM
 
 
 
-        public List<FlightInfoPartial> deleteNullFromList(string category)
-        {
-            List<FlightInfoPartial> list=null;
-            if (category == "incoming")
-                list= bl.GetCurrentInComingFlights();   
-            if (category == "outgoing")
-               list= bl.GetCurrentOutGoingFlights();
-            try
-            {
-                foreach (FlightInfoPartial flight in list)
-                {
-                    if (flight.FlightCode == "" ||flight.Destination=="")
-                        list.Remove(flight);
+        //public List<FlightInfoPartial> deleteNullFromList(string category)
+        //{
+        //    List<FlightInfoPartial> list = null;
+        //    if (category == "incoming")
+        //        list = bl.GetCurrentInComingFlights();
+        //    if (category == "outgoing")
+        //        list = bl.GetCurrentOutGoingFlights();
+        //    try
+        //    {
+        //        foreach (FlightInfoPartial flight in list)
+        //        {
+        //            if (flight.FlightCode == "" || flight.Destination == "")
+        //                list.Remove(flight);
 
-                }
-            }catch(Exception e)
-            {
-                Debug.Print(e.Message);
-            }
-            return list;
-            
-            
-        }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Debug.Print(e.Message);
+        //    }
+        //    return list;
+
+
+        //}
         public FlightInfo.Root VmGetFlightData(string sourceId)
         {
             FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
