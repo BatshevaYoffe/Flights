@@ -58,8 +58,8 @@
         <TextBox x:Name="Counter" HorizontalAlignment="Left" Margin="700,12,0,12" TextWrapping="Wrap" Text="1" Width="45"/>
 
 
-        <Button Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click" RenderTransformOrigin="0.322,1.237"/>
-        <ListBox ItemsSource="{Binding}" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
+        <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
+        <ListBox ItemsSource="{Binding }" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

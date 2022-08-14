@@ -58,6 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\FlightInfoPartialModel.cs" />
+    <Compile Include="VM\Command\ShowFlightsCommand.cs" />
     <Compile Include="VM\Converters\TickToDateTimeConverter.cs" />
     <Compile Include="VM\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -114,5 +116,6 @@
       <Name>FlightModel</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

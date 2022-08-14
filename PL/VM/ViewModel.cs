@@ -1,7 +1,10 @@
 ﻿using BL;
 using FlightModel;
+using PL.Model;
+using PL.VM.Command;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -13,20 +16,31 @@ namespace PL.VM
 {
     public class ViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
+        public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
+        public ShowFlightsCommand ReadAll { get; set; }
+
         IBL bl = new BLImp();
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        private FlightInfoPartialModel FIPModel;
+        
+        public ViewModel()
         {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
+            FIPModel = new FlightInfoPartialModel();
+            ReadAll = new ShowFlightsCommand();
+            ReadAll.read += ShowAllFlights;
+           
         }
+        private void ShowAllFlights()
+        {
+            InComingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.InComingflights);
+            OutGoingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.OutGoingflights);
+
+        }
+
+
+
 
         public List<FlightInfoPartial> deleteNullFromList(string category)
         {

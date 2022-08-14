@@ -1,7 +1,8 @@
-﻿using BL;
+﻿ using BL;
 using DAL;// אולי למחוק
 using FlightModel;
 using Microsoft.Maps.MapControl.WPF;
+using PL.VM.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,11 +29,15 @@ namespace PL
     {
         FlightInfoPartial SelectedFlight = null; //Selected Flight
 
-         VM.ViewModel vm =new VM.ViewModel();
+         //VM.ViewModel vm =new VM.ViewModel();
+        
+        VM.ViewModel vm { get; set; }
 
         public MainWindow()//
         {
             InitializeComponent();
+            vm = new VM.ViewModel();
+            this.DataContext = vm;
         }
 
 
