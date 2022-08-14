@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +29,21 @@ namespace DAL
                     Destination = flightIP.airport.destination.name,
                     DateTime = DateTime.Today
                 };
-                if (ctx.Flights.Find(flight.FlightCode) == null)
+                try
                 {
-                    ctx.Flights.Add(flight);
-                    ctx.SaveChanges();
+                    if (ctx.Flights.Any(o => o.FlightCode == flight.FlightCode))
+                    {
+                        throw new Exception("this flight exist in the data base");
+                    }
                 }
+                catch (Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
+
+                ctx.Flights.Add(flight);
+                    ctx.SaveChanges();
+                
             }
         }
         //function to get flights that selected by date
