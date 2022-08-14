@@ -72,7 +72,7 @@
 
 
         <Label Content="Flight Details" HorizontalAlignment="Left" Margin="39,434,0,0" VerticalAlignment="Top" Height="26" Width="79"/>
-        <ListBox ItemsSource="{Binding  InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,92,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
+        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,92,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

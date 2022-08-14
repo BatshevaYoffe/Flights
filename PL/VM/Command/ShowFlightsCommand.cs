@@ -17,17 +17,17 @@ namespace PL.VM.Command
             vm = VM;
         }
 
-        event EventHandler ICommand.CanExecuteChanged
+        public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        bool ICommand.CanExecute(object parameter)
+        public bool CanExecute(object parameter)
         {
-            return true;
+            return true ;
         }
 
-        void ICommand.Execute(object parameter) => vm.ShowAllFlights();
+        public void Execute(object parameter) => vm.ShowAllFlights();
     }
 }
