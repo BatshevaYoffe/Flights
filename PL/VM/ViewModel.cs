@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace PL.VM
 {
     public class ViewModel : INotifyPropertyChanged
@@ -63,6 +64,10 @@ namespace PL.VM
                                      select f).ToList<FlightInfo.Trail>();
 
             return OrderedPlaces;
+        }
+        public void SaveFlightInDB(FlightInfo.Root flightRoot)
+        {
+            bl.BLSaveFlight(flightRoot);
         }
     }
 }

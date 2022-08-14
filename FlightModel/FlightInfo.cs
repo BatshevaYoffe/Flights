@@ -13,7 +13,7 @@ namespace FlightModel
         {
             public Model model { get; set; }
             public int countryId { get; set; }
-            public string registration { get; set; }
+            public string registration { get; set; }//רישום מטוסים 
             public string hex { get; set; }
             public object age { get; set; }
             public object msn { get; set; }

@@ -10,15 +10,29 @@ namespace DAL
 {
     public class ConectionToDB
     {
-        void addFlight(FlightInfoPartial flightIP)
+        public void addFlight(FlightInfo.Root flightIP)
         {
             using (var ctx = new FlightContext())
             {
-                var f = new Flight() {Id=-1, Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Now };
-                var flight = new Flight() {  Id= flightIP.Id, FlightCode = flightIP.FlightCode, Source = flightIP.Source, Destination = flightIP.Destination, DateTime = flightIP.DateTime };
-                
-                ctx.Flights.Add(flight);
-                ctx.SaveChanges();
+                var f = new Flight() {Id=-1, Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Today
+                ,AircraftRegistration="12-axxx",Airline="wizz"
+                };
+
+                var flight = new Flight
+                {
+                    Id = -1,
+                    FlightCode = flightIP.identification.callsign,
+                    AircraftRegistration = flightIP.aircraft.registration,
+                    Airline = flightIP.airline.name,
+                    Source = flightIP.airport.origin.name,
+                    Destination = flightIP.airport.destination.name,
+                    DateTime = DateTime.Today
+                };
+                if (ctx.Flights.Find(flight.FlightCode) == null)
+                {
+                    ctx.Flights.Add(flight);
+                    ctx.SaveChanges();
+                }
             }
         }
         //function to get flights that selected by date
@@ -46,9 +60,11 @@ namespace DAL
     public class Flight
     {
         public int Id { get; set; }
+        public string FlightCode { get; set; }
+        public string AircraftRegistration { get; set; }
+        public string Airline { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
-        public string FlightCode { get; set; }
         public DateTime DateTime { get; set; }
     }
 }

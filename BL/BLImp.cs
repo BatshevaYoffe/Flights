@@ -24,9 +24,11 @@ namespace BL
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
              return  dal.GetFlightData(SourceId);
-            
-
-
+        }
+        public void BLSaveFlight(FlightInfo.Root flightRoot)
+        {
+            ConectionToDB conectionToDB = new ConectionToDB();
+            conectionToDB.addFlight(flightRoot);    
         }
     }
 }

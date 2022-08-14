@@ -70,6 +70,7 @@ namespace PL
         {
              //AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
             var Flight = vm.VmGetFlightData(selected.SourceId);
+            vm.SaveFlightInDB(Flight);
             
             DetailsPanel.DataContext = Flight;
 
