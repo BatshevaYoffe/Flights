@@ -28,11 +28,11 @@ namespace PL.VM
         public ViewModel()
         {
             FIPModel = new FlightInfoPartialModel();
-            ReadAll = new ShowFlightsCommand();
-            ReadAll.read += ShowAllFlights;
+            ReadAll = new ShowFlightsCommand(this);
+            //ReadAll.read += ShowAllFlights;
            
         }
-        private void ShowAllFlights()
+        public void ShowAllFlights()
         {
             InComingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.InComingflights);
             OutGoingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.OutGoingflights);

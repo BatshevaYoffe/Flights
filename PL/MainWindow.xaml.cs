@@ -41,14 +41,14 @@ namespace PL
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            //load current data
-            // this.DataContext = FlightKeys;
-            InFlightsListBox.DataContext = vm.deleteNullFromList("incoming");
-            OutFlightsListBox.DataContext =vm.deleteNullFromList("outgoing");
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //load current data
+        //    // this.DataContext = FlightKeys;
+        //    InFlightsListBox.DataContext = vm.deleteNullFromList("incoming");
+        //    OutFlightsListBox.DataContext =vm.deleteNullFromList("outgoing");
 
-        }
+        //}
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
