@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml"
         mc:Ignorable="d"
 
         Title="MainWindow" Height="800" Width="800">
@@ -13,7 +13,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="DAL\images\airplane.png"  />
+                        <Image Source="C:\Users\Bat7\source\repos\Flights2\DAL\Images\airplane.png"  />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -27,21 +27,36 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+
+        </Style>
+        <Style TargetType="m:Pushpin" x:Key="Airport">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Image Source="C:\Users\Bat7\source\repos\Flights2\DAL\Images\header__logo-icon.png"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
         </Style>
 
+
         <!-- We can bind to a method, Not this time
-        <ObjectDataProvider ObjectType="{x:Type helper:HelperClass}" MethodName="GetDateTimeFromEpoch" x:Key="EpochConvert">
+        <ObjectDataProvider ObjectType="{x:Type helper:HelperClass}" MethodName="GetDataTimeFromEpoch" x:Key="EpochConvert">
             <ObjectDataProvider.MethodParameters>
                 <system:Double>0</system:Double>
             </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider> -->
+        </ObjectDataProvider>-->
 
 
-       <!--<converters:TickToDateTimeConverter x:Key="TickConvert"/>-->
+        <converters:TickToDateTimeConverter x:Key="TickConvert"/>
 
     </Window.Resources>
 
     <Grid Margin="0,0,10,0" Height="712" VerticalAlignment="Center">
+        <Button Content="Start Track" HorizontalAlignment="Left" Height="33" Margin="316,15,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_1"/>
+        <TextBox x:Name="Counter" HorizontalAlignment="Left" Margin="700,12,0,12" TextWrapping="Wrap" Text="1" Width="45"/>
+
 
         <Button Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89" Click="Button_Click" RenderTransformOrigin="0.322,1.237"/>
         <ListBox ItemsSource="{Binding}" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
@@ -69,7 +84,7 @@
 
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
                Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="260,148,10,210" >
-            <m:Pushpin Location="32.00581856838886, 34.885711609813164" />
+            <m:Pushpin Name="Ben" Location="32.00581856838886, 34.885711609813164" Image.DpiChanged="ben" />
         </m:Map>
 
         <Label Content="Incoming" HorizontalAlignment="Left" Margin="30,54,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
@@ -84,7 +99,7 @@
             <TextBlock Text="{Binding airport.origin.name}"></TextBlock>
             <TextBlock Text="{Binding airport.origin.position.country.name}"></TextBlock>
             <TextBlock Text="{Binding status.text}"></TextBlock>
-            <!-- <TextBlock Text="{Binding time.estimated.arrival,Converter={StaticResource TickConvert}}"></TextBlock>-->
+            <TextBlock Text="{Binding time.estimated.arrival,Converter={StaticResource TickConvert}}"></TextBlock>
         </StackPanel>
 
 

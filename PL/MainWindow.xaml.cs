@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static FlightModel.FlightInfo;
 
 namespace PL
@@ -42,6 +43,20 @@ namespace PL
             InFlightsListBox.DataContext = vm.deleteNullFromList("incoming");
             OutFlightsListBox.DataContext =vm.deleteNullFromList("outgoing");
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 15);
+            dispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateFlight(SelectedFlight);
+            Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
 
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -133,9 +148,17 @@ namespace PL
                     polyline.Locations.Add(new Location(item.lat, item.lng));
                 }
 
-                myMap.Children.Clear();
+              //  myMap.Children.Clear();
                 myMap.Children.Add(polyline);
             }
-        
+
+        private void ben(object sender, DpiChangedEventArgs e)
+        {
+            Pushpin PinCurrent = new Pushpin { };
+            PinCurrent.Style = (Style)Resources["Airport"];
+
+
+
+        }
     }
 }
