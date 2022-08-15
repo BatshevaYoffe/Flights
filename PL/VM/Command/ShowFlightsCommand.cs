@@ -10,12 +10,12 @@ namespace PL.VM.Command
     public class ShowFlightsCommand : ICommand
     {
 
-        //public event Action read;
-        ViewModel vm;
-        public ShowFlightsCommand(ViewModel VM)
-        {
-            vm = VM;
-        }
+        public event Action read;
+        //ViewModel vm;
+        //public ShowFlightsCommand(ViewModel VM)
+        //{
+        //    vm = VM;
+        //}
 
         public event EventHandler CanExecuteChanged
         {
@@ -28,6 +28,8 @@ namespace PL.VM.Command
             return true ;
         }
 
-        public void Execute(object parameter) => vm.ShowAllFlights();
+        //public void Execute(object parameter) => vm.ShowAllFlights();
+        public void Execute(object parameter) => read();
+
     }
 }

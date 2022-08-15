@@ -28,8 +28,8 @@ namespace PL.VM
         public ViewModel()
         {
             FIPModel = new FlightInfoPartialModel();
-            ReadAll = new ShowFlightsCommand(this);
-            //ReadAll.read += ShowAllFlights;
+            ReadAll = new ShowFlightsCommand();
+            ReadAll.read += ShowAllFlights;
             
 
         }
