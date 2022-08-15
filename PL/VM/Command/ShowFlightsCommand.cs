@@ -27,7 +27,7 @@ namespace PL.VM.Command
         {
             return true ;
         }
-
+        //helpppppppp
         //public void Execute(object parameter) => vm.ShowAllFlights();
         public void Execute(object parameter) => read();
 
