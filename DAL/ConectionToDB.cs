@@ -11,13 +11,31 @@ namespace DAL
 {
     public class ConectionToDB
     {
+        static void Main(string[] args)
+        {
+            var f = new Flight()
+            {
+                Id = -1,
+                Source = "TLV",
+                Destination = "JFK",
+                FlightCode = "1111",
+                DateTime = DateTime.Today
+               ,
+                AircraftRegistration = "12-axxx",
+                Airline = "wizz"
+
+            };
+            using (var ctx = new FlightContext())
+            {
+                ctx.Flights.Add(f);
+                ctx.SaveChanges();
+            }
+        }
         public void addFlight(FlightInfo.Root flightIP)
         {
             using (var ctx = new FlightContext())
             {
-                var f = new Flight() {Id=-1, Source="TLV", Destination= "JFK",FlightCode= "1111",DateTime= DateTime.Today
-                ,AircraftRegistration="12-axxx",Airline="wizz"
-                };
+               
 
                 var flight = new Flight
                 {
@@ -41,8 +59,8 @@ namespace DAL
                     Debug.Print(e.Message);
                 }
 
-                //ctx.Flights.Add(flight);
-                    ctx.SaveChanges();
+                ctx.Flights.Add(flight);
+                ctx.SaveChanges();
                 
             }
         }
