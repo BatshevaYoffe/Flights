@@ -1,6 +1,7 @@
 ﻿using FlightModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace DAL
                     Debug.Print(e.Message);
                 }
 
-                ctx.Flights.Add(flight);
+                //ctx.Flights.Add(flight);
                 ctx.SaveChanges();
                 
             }
@@ -89,6 +90,7 @@ namespace DAL
     public class Flight
     {
         public int Id { get; set; }
+        [Key]
         public string FlightCode { get; set; }
         public string AircraftRegistration { get; set; }
         public string Airline { get; set; }
