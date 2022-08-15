@@ -36,7 +36,8 @@ namespace PL
         public MainWindow()//
         {
             InitializeComponent();
-            vm = new VM.ViewModel();
+            vm = new VM.ViewModel(myMap,Resources);
+            //vm(myMap, Resources);
             this.DataContext = vm;
         }
 
@@ -60,14 +61,14 @@ namespace PL
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            UpdateFlight(SelectedFlight);
+            vm.UpdateFlight(SelectedFlight);
             Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
 
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedFlight = e.AddedItems[0] as FlightInfoPartial; //InFlightsListBox.SelectedItem as FlightInfoPartial;
-            UpdateFlight(SelectedFlight);
+            vm.UpdateFlight(SelectedFlight);
 
         }
 
@@ -78,9 +79,6 @@ namespace PL
             vm.SaveFlightInDB(Flight);
             
             DetailsPanel.DataContext = Flight;
-
-
-
             // Update map
             if (Flight != null)
             {
@@ -162,9 +160,6 @@ namespace PL
         {
             Pushpin PinCurrent = new Pushpin { };
             PinCurrent.Style = (Style)Resources["Airport"];
-
-
-
         }
     }
 }

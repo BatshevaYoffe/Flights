@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
-        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
 
         Title="MainWindow" Height="800" Width="800">
@@ -59,7 +59,7 @@
 
 
         <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
-        <ListBox  ItemsSource="{Binding OutGoingFlights }" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
+        <ListBox ItemsSource="{Binding OutGoingFlights }" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
