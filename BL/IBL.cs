@@ -13,5 +13,6 @@ namespace BL
         List<FlightInfoPartial> GetCurrentInComingFlights();
         FlightInfo.Root GetDataofOneFlight(string SourceId);
         void BLSaveFlight(FlightInfo.Root flightRoot);
+        string ReturnStatusOfDate(DateTime date);
     }
 }

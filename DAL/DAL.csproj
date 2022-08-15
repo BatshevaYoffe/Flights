@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsynchronicHebCal.cs" />
     <Compile Include="AsynchronicTrafficAdapter.cs" />
     <Compile Include="ConectionToDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +67,10 @@
     <ProjectReference Include="..\FlightModel\FlightModel.csproj">
       <Project>{2BF381C2-34E4-4AED-A46A-52808DCEF619}</Project>
       <Name>FlightModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HebDades\HebDates.csproj">
+      <Project>{89109F97-6D45-4D98-AA01-D705CBC12151}</Project>
+      <Name>HebDates</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

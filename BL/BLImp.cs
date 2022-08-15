@@ -11,10 +11,11 @@ namespace BL
 {
     public class BLImp : IBL
     {
-        AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
+        AsynchronicTrafficAdapter asynchronicTrafficAdapter = new AsynchronicTrafficAdapter();
+        AsynchronicHebCal asynchronicHebCal=new AsynchronicHebCal();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
-            var FlightKeys = dal.GetCurrentFlights();
+            var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
             
             try
             {
@@ -33,7 +34,7 @@ namespace BL
         }
         public List<FlightInfoPartial> GetCurrentInComingFlights()
         {
-            var FlightKeys = dal.GetCurrentFlights();
+            var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
             try
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Incoming"])
@@ -51,12 +52,28 @@ namespace BL
         }
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
-             return  dal.GetFlightData(SourceId);
+             return asynchronicTrafficAdapter.GetFlightData(SourceId);
         }
         public void BLSaveFlight(FlightInfo.Root flightRoot)
         {
             ConectionToDB conectionToDB = new ConectionToDB();
             conectionToDB.addFlight(flightRoot);    
+        }
+        public string ReturnStatusOfDate(DateTime date)
+        {
+            string status = null;
+            try
+            {
+                asynchronicHebCal.AsyncReturnStatus(date);
+            }
+
+            catch (Exception e)
+            {
+                status = e.Message;
+            }
+            return status;
+
+
         }
     }
 }
