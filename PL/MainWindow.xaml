@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-
         Title="MainWindow" Height="800" Width="800">
     <Window.Resources>
         <Style TargetType="m:Pushpin" x:Key="FromIsrael">
@@ -17,7 +16,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
         </Style>
         <Style TargetType="m:Pushpin" x:Key="ToIsrael">
             <Setter Property="Template">
@@ -27,7 +25,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
         </Style>
         <Style TargetType="m:Pushpin" x:Key="Airport">
             <Setter Property="Template">
@@ -37,18 +34,13 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
         </Style>
-
-
         <!-- We can bind to a method, Not this time
         <ObjectDataProvider ObjectType="{x:Type helper:HelperClass}" MethodName="GetDataTimeFromEpoch" x:Key="EpochConvert">
             <ObjectDataProvider.MethodParameters>
                 <system:Double>0</system:Double>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>-->
-
-
         <converters:TickToDateTimeConverter x:Key="TickConvert"/>
 
     </Window.Resources>
