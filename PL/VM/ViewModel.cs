@@ -30,9 +30,10 @@ namespace PL.VM
             FIPModel = new FlightInfoPartialModel();
             ReadAll = new ShowFlightsCommand(this);
             //ReadAll.read += ShowAllFlights;
-           
+            
+
         }
-       
+
         public void ShowAllFlights()
         {
             InComingFlights = new ObservableCollection<FlightInfoPartial>(FIPModel.InComingflights);
