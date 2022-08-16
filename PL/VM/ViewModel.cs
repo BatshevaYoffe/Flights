@@ -158,9 +158,10 @@ namespace PL.VM
 
             return OrderedPlaces;
         }
-        public void SaveFlightInDB(FlightInfo.Root flightRoot)
+        public void SaveFlightInDB(FlightInfoPartial flight)
         {
-            bl.BLSaveFlight(flightRoot);
+            FIPModel.save(flight);
+           // bl.BLSaveFlight(flightRoot);
         }
 
         public void UpdateFlight(FlightInfoPartial selected)
@@ -173,7 +174,7 @@ namespace PL.VM
             SelectedFlight = selected;
 
             var Flight = VmGetFlightData(selected.SourceId);
-            SaveFlightInDB(Flight);
+            SaveFlightInDB(selected);
 
             detailsPanel.DataContext = Flight;
 

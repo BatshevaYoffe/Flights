@@ -11,7 +11,7 @@ namespace DAL
     public class AsynchronicHebCal
     {
 
-        public async Task<string> AsyncReturnStatus(DateTime date)
+        public async Task<string> GetStatusOfDate(DateTime date)
         {
             for (int i = 0; i <=7; i++)
             {
@@ -21,9 +21,9 @@ namespace DAL
                     var yyyy = date.ToString("yyyy");
                     var mm = date.ToString("MM");
                     var dd = date.ToString("dd");
-                    string URL1 = $"https://www.hebcal.com/converter?cfg=json&date={yyyy}-{mm}-{dd}&g2h=1&strict=1";
+                    //string URL1 = $"https://www.hebcal.com/converter?cfg=json&date={yyyy}-{mm}-{dd}&g2h=1&strict=1";
                     string URL = $"https://www.hebcal.com/converter?cfg=json&date=(yyyy)-(mm)-(dd)&g2h=1&strict=1";
-                    var json = await webClient.DownloadStringTaskAsync(URL1);
+                    var json = await webClient.DownloadStringTaskAsync(URL);
                     Root Date = JsonConvert.DeserializeObject<Root>(json);
 
                     if (Date.events[0].Contains("Erev"))

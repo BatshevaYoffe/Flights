@@ -11,18 +11,21 @@ namespace PL.Model
     public class FlightInfoRootModel
     {
         IBL bl = new BLImp();
-        public List<FlightInfo.Root> FlightsInformation;
+        public List<FlightInfo.Root> FlightsInformation=null;
 
-        public  FlightInfoRootModel()
-        {
-            FlightsInformation=new List<FlightInfo.Root>();
-        }
        public FlightInfo.Root GetDataOfFlightFromModel(string flightCode)
        {
-            foreach (FlightInfo.Root f in FlightsInformation)
+            if (FlightsInformation!= null)
             {
-                if(flightCode== f.identification.callsign)
-                    return f;
+                foreach (FlightInfo.Root f in FlightsInformation)
+                {
+                    if (f!=null&&flightCode == f.identification.callsign)
+                        return f;
+                }
+            }
+            if(FlightsInformation == null)
+            {
+                FlightsInformation = new List<FlightInfo.Root>();
             }
             FlightInfo.Root flightRoot = bl.GetDataofOneFlight(flightCode);
             FlightsInformation.Add(flightRoot);

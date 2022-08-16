@@ -54,20 +54,15 @@ namespace BL
         {
              return asynchronicTrafficAdapter.GetFlightData(SourceId);
         }
-        public void BLSaveFlight(FlightInfo.Root flightRoot)
+        public void BLSaveFlight(FlightInfoPartial flight)
         {
             ConectionToDB conectionToDB = new ConectionToDB();
-            conectionToDB.addFlight(flightRoot);    
+            conectionToDB.addFlight(flight);    
         }
         public string ReturnStatusOfDate(DateTime date)
         {
-            string status=null;
-           //status=AsynchronicHebCal.AsyncReturnStatus(date).Result;
-            return status;
-
-
-
-
+            //string status = await AsynchronicHebCal.GetStatusOfDate(date);
+            return "bkfb";
         }
     }
 }
