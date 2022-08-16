@@ -25,6 +25,7 @@ namespace PL.VM
 
         public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
+        public List<Pushpin> Pushpins;
         public ShowFlightsCommand ReadAll { get; set; }
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
@@ -89,6 +90,7 @@ namespace PL.VM
                 Trail CurrentPlace = null;
 
                 Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
+                myMap.Children.Remove(PinCurrent);
                 Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
                 // Pushpin PinDestination = new Pushpin { ToolTip = Flight.airport.origin.name };
 
@@ -123,6 +125,7 @@ namespace PL.VM
                 //PinCurrent.MouseDown += Pin_MouseDown;
 
                 myMap.Children.Add(PinOrigin);
+                //Pushpins.Add(PinCurrent);
                 myMap.Children.Add(PinCurrent);
             }
 

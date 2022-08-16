@@ -51,20 +51,6 @@ namespace PL
 
         //}
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 15);
-            dispatcherTimer.Start();
-        }
-
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            vm.UpdateFlight(SelectedFlight);
-            Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
-        }
-
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedFlight = e.AddedItems[0] as FlightInfoPartial; //InFlightsListBox.SelectedItem as FlightInfoPartial;
