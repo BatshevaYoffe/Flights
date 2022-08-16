@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HebDades
+namespace HebDates
 {
     public class Models
     {
     }
     public class HeDateParts
     {
-        public string y { get; set; }   
-        public string m { get; set; }   
+        public string y { get; set; }
+        public string m { get; set; }
         public string d { get; set; }
     }
     public class Root
@@ -28,7 +28,6 @@ namespace HebDades
         public HeDateParts heDateParts { get; set; }
         public List<string> events { get; set; }
     }
-
 
 
 }

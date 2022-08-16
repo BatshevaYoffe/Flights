@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{43F2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightModel", "FlightModel\FlightModel.csproj", "{2BF381C2-34E4-4AED-A46A-52808DCEF619}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HebDates", "HebDades\HebDates.csproj", "{89109F97-6D45-4D98-AA01-D705CBC12151}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HebDates", "HebDates\HebDates.csproj", "{279A777C-FCFC-44C9-9385-CAF676F97605}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{2BF381C2-34E4-4AED-A46A-52808DCEF619}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BF381C2-34E4-4AED-A46A-52808DCEF619}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BF381C2-34E4-4AED-A46A-52808DCEF619}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89109F97-6D45-4D98-AA01-D705CBC12151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89109F97-6D45-4D98-AA01-D705CBC12151}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89109F97-6D45-4D98-AA01-D705CBC12151}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89109F97-6D45-4D98-AA01-D705CBC12151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{279A777C-FCFC-44C9-9385-CAF676F97605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{279A777C-FCFC-44C9-9385-CAF676F97605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{279A777C-FCFC-44C9-9385-CAF676F97605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{279A777C-FCFC-44C9-9385-CAF676F97605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
