@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using static FlightModel.FlightInfo;
@@ -28,11 +29,11 @@ namespace PL.VM
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
 
-
         IBL bl = new BLImp();
         private FlightInfoPartialModel FIPModel;
         private Map myMap;
         private ResourceDictionary resources;
+        private StackPanel detailsPanel;
 
         public ViewModel()
         {
@@ -47,7 +48,7 @@ namespace PL.VM
 
         }
 
-        public ViewModel(Map myMap, ResourceDictionary resources)
+        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel)
         {
             FIPModel = new FlightInfoPartialModel();
             InComingFlights = new ObservableCollection<FlightInfoPartial>();
@@ -60,6 +61,7 @@ namespace PL.VM
 
             this.myMap = myMap;
             this.resources = resources;
+            this.detailsPanel = detailsPanel;
         }
 
         private void AllFlightsOnMap()
@@ -163,11 +165,10 @@ namespace PL.VM
             {
                 return;
             }
-            //AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(Flight);
 
-            //DetailsPanel.DataContext = Flight;
+            detailsPanel.DataContext = Flight;
 
 
 
@@ -240,9 +241,10 @@ namespace PL.VM
             }
             if(color==System.Windows.Media.Colors.Green)
             {
-               // myMap.Children.Clear();
+                //myMap.Children.Remove(polyline);
             }
-            //  myMap.Children.Clear();
+
+
             myMap.Children.Add(polyline);
         }
         private void Button_Click_1()
@@ -255,7 +257,8 @@ namespace PL.VM
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            ShowAllFlights();
+            //myMap.Children.Clear();
+            AllFlightsOnMap();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
     }
