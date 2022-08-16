@@ -33,7 +33,7 @@ namespace PL
         public MainWindow()//
         {
             InitializeComponent();
-            vm = new VM.ViewModel(myMap,Resources, DetailsPanel);
+            vm = new VM.ViewModel(myMap,Resources, DetailsPanel,TodayStatus);
             this.DataContext = vm;
         }
 

@@ -20,8 +20,7 @@ namespace DAL
                 Source = "TLV",
                 Destination = "JFK",
                 FlightCode = "1111",
-                DateTime = DateTime.Today
-               ,
+                DateTime = DateTime.Today,
                 AircraftRegistration = "12-axxx",
                 Airline = "wizz"
 
@@ -38,8 +37,8 @@ namespace DAL
             {
                
 
-                var flight = new Flight
-                {
+                var flight = new Flight()
+                { 
                     Id = -1,
                     FlightCode = flightIP.identification.callsign,
                     AircraftRegistration = flightIP.aircraft.registration,
@@ -60,7 +59,7 @@ namespace DAL
                     Debug.Print(e.Message);
                 }
 
-                //ctx.Flights.Add(flight);
+                ctx.Flights.Add(flight);
                 ctx.SaveChanges();
                 
             }
@@ -90,7 +89,6 @@ namespace DAL
     public class Flight
     {
         public int Id { get; set; }
-        [Key]
         public string FlightCode { get; set; }
         public string AircraftRegistration { get; set; }
         public string Airline { get; set; }

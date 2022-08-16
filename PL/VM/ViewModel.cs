@@ -1,5 +1,6 @@
 ﻿using BL;
 using FlightModel;
+using HebDates;
 using Microsoft.Maps.MapControl.WPF;
 using PL.Model;
 using PL.VM.Command;
@@ -28,28 +29,21 @@ namespace PL.VM
         public ShowFlightsCommand ReadAll { get; set; }
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
+        public DateAndStatus todayStatus { get; set; }
 
         IBL bl = new BLImp();
+        private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
         private Map myMap;
         private ResourceDictionary resources;
         private StackPanel detailsPanel;
+        private StackPanel todayDateStatus;
 
-        public ViewModel()
+        
+
+        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel,StackPanel todayStatus)
         {
-            FIPModel = new FlightInfoPartialModel();
-            InComingFlights = new ObservableCollection<FlightInfoPartial>();
-            OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
-
-            ReadAll = new ShowFlightsCommand();
-            ReadAll.read += ShowAllFlights;
-            ReadAll.read+=AllFlightsOnMap;
-            
-
-        }
-
-        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel)
-        {
+            hebCalModel = new HebCalModel();
             FIPModel = new FlightInfoPartialModel();
             InComingFlights = new ObservableCollection<FlightInfoPartial>();
             OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
@@ -58,12 +52,17 @@ namespace PL.VM
             ReadAll.read += ShowAllFlights;
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += Button_Click_1;
+            ReadAll.read += ShowDateStatus;
 
             this.myMap = myMap;
             this.resources = resources;
             this.detailsPanel = detailsPanel;
+            this.todayDateStatus = todayStatus;
         }
-
+        public void ShowDateStatus()
+        {
+            todayDateStatus.DataContext=hebCalModel.ReturnStatusOfDate(DateTime.Today);
+        }
         private void AllFlightsOnMap()
         {
             foreach (FlightInfoPartial flight in InComingFlights)
