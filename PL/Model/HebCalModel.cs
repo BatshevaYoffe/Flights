@@ -22,7 +22,7 @@ namespace PL.Model
             var DS = new HebDates.DateAndStatus()
             {
                 Date = date,
-                Status = "ערב חג",
+                Status = null,
             };
            
             return DS;

@@ -85,9 +85,9 @@
         </ListBox>
         <Label Content="Incoming" HorizontalAlignment="Left" Margin="551,451,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
         <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="774,446,0,0"/>
-        <StackPanel x:Name="TodayStatus"  Height="40" Width="354" >
-             <TextBlock Text="{Binding Date}"/>
-            <TextBlock Text="{Binding Status.text}"/>
+        <StackPanel x:Name="TodayStatus" Margin="314,516,499,48" >
+            <TextBlock Text="{Binding Date}" />
+            <TextBlock Text="{Binding Status}"/>
         </StackPanel>
 
 

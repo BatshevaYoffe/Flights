@@ -46,7 +46,7 @@ namespace DAL
                             SourceId = key,
                             Long = Convert.ToDouble(item.Value[1]),
                             Lat = Convert.ToDouble(item.Value[2]),
-                            DateTime = Helper.GetDataTimeFromEpoch((int)Convert.ToDouble(item.Value[10])),///
+                            DateTime = Helper.GetDataTimeFromEpoch((int)Convert.ToDouble(item.Value[10])),
                             FlightCode = item.Value[13].ToString()
                         });
                         if (item.Value[12].ToString() == "TLV") Incoming.Add(new FlightInfoPartial

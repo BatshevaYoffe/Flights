@@ -34,6 +34,7 @@ namespace PL.VM
         IBL bl = new BLImp();
         private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
+        private FlightInfoRootModel FIRModel;
         private Map myMap;
         private ResourceDictionary resources;
         private StackPanel detailsPanel;
@@ -45,13 +46,14 @@ namespace PL.VM
         {
             hebCalModel = new HebCalModel();
             FIPModel = new FlightInfoPartialModel();
+            FIRModel = new FlightInfoRootModel();
             InComingFlights = new ObservableCollection<FlightInfoPartial>();
             OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
 
             ReadAll = new ShowFlightsCommand();
             ReadAll.read += ShowAllFlights;
             ReadAll.read += AllFlightsOnMap;
-            ReadAll.read += Button_Click_1;
+            ReadAll.read += StartTracking;
             ReadAll.read += ShowDateStatus;
 
             this.myMap = myMap;
@@ -71,7 +73,7 @@ namespace PL.VM
             }
             foreach (FlightInfoPartial flight in OutGoingFlights)
             {
-                //UpdateFlight(flight);
+                AddFlightToMap(flight);
             }
 
         }
@@ -144,7 +146,7 @@ namespace PL.VM
 
         public FlightInfo.Root VmGetFlightData(string sourceId)
         {
-            FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
+            FlightInfo.Root Flight=FIRModel.GetDataOfFlightFromModel(sourceId);
             return Flight;  
         }
         public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
@@ -167,6 +169,7 @@ namespace PL.VM
             {
                 return;
             }
+            //FlightInfoPartial PreviousChoice = SelectedFlight;
             SelectedFlight = selected;
 
             var Flight = VmGetFlightData(selected.SourceId);
@@ -179,10 +182,7 @@ namespace PL.VM
             // Update map
             if (Flight != null)
             {
-                //var OrderedPlaces = (from f in Flight.trail
-                //                     orderby f.ts
-                //                     select f).ToList<Trail>();
-
+                
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
                 addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
 
@@ -251,7 +251,7 @@ namespace PL.VM
 
             myMap.Children.Add(polyline);
         }
-        private void Button_Click_1()
+        private void StartTracking()
         {
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += DispatcherTimer_Tick;

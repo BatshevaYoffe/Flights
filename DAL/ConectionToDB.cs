@@ -59,7 +59,7 @@ namespace DAL
                     Debug.Print(e.Message);
                 }
 
-                ctx.Flights.Add(flight);
+              //  ctx.Flights.Add(flight);
                 ctx.SaveChanges();
                 
             }
