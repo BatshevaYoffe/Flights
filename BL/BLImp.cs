@@ -62,16 +62,11 @@ namespace BL
         public string ReturnStatusOfDate(DateTime date)
         {
             string status = null;
-            try
-            {
-                asynchronicHebCal.AsyncReturnStatus(date);
-            }
+            
+                status=Task<string>.Run(AsynchronicHebCal.AsyncReturnStatus(date));
+            
 
-            catch (Exception e)
-            {
-                status = e.Message;
-            }
-            return status;
+            
 
 
         }
