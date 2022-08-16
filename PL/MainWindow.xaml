@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="622" Width="998">
     <Window.Resources>
         <Style TargetType="m:Pushpin" x:Key="FromIsrael">
             <Setter Property="Template">
@@ -45,54 +45,52 @@
 
     </Window.Resources>
 
-    <Grid Margin="0,0,10,0" Height="712" VerticalAlignment="Center">
+    <Grid Height="622" VerticalAlignment="Top">
         <Button Content="Start Track" HorizontalAlignment="Left" Height="33" Margin="316,15,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_1"/>
-        <TextBox x:Name="Counter" HorizontalAlignment="Left" Margin="700,12,0,12" TextWrapping="Wrap" Text="1" Width="45"/>
+        <TextBox x:Name="Counter" HorizontalAlignment="Left" Margin="700,12,0,547" TextWrapping="Wrap" Text="1" Width="45"/>
 
 
         <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
-        <ListBox ItemsSource="{Binding OutGoingFlights }" Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,280,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FlightCode}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-
-
-        <Label Content="Flight Details" HorizontalAlignment="Left" Margin="39,434,0,0" VerticalAlignment="Top" Height="26" Width="79"/>
-        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" Margin="30,92,0,0" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FlightCode}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
 
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
-               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="260,148,10,210" >
-            <m:Pushpin Name="Ben" Location="32.00581856838886, 34.885711609813164" Image.DpiChanged="ben" />
+               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,207" >
+            <m:Pushpin Location="32.00581856838886, 34.885711609813164" />
+            <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Margin="30,227,0,0" Background="{x:Null}" >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FlightCode}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="30,344,0,0" RenderTransformOrigin="0.633,2.847"/>
+            
+            <Label Content="Incoming" HorizontalAlignment="Left" Margin="37,44,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+            <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="39,197,0,0"/>
+            <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Margin="30,81,0,0" Background="{x:Null}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding FlightCode}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </m:Map>
-
-        <Label Content="Incoming" HorizontalAlignment="Left" Margin="30,54,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
-        <Label Content="Outgoing" HorizontalAlignment="Left" Margin="30,246,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
-
-        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="218" VerticalAlignment="Top" Width="200" Margin="18,465,0,0">
-            <TextBlock Text="{Binding identification.callsign}"></TextBlock>
-            <TextBlock Text="{Binding aircraft.registration}"></TextBlock>
-            <TextBlock Text="{Binding airline.name}"></TextBlock>
-            <TextBlock Text="{Binding airport.destination.name}"></TextBlock>
-            <TextBlock Text="{Binding airport.destination.position.country.name}"></TextBlock>
-            <TextBlock Text="{Binding airport.origin.name}"></TextBlock>
-            <TextBlock Text="{Binding airport.origin.position.country.name}"></TextBlock>
-            <TextBlock Text="{Binding status.text}"></TextBlock>
-            <TextBlock Text="{Binding time.estimated.arrival,Converter={StaticResource TickConvert}}"></TextBlock>
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="159" VerticalAlignment="Top" Width="287" Margin="536,348,0,0">
+            <TextBlock Text="{Binding identification.callsign}"/>
+            <TextBlock Text="{Binding aircraft.registration}"/>
+            <TextBlock Text="{Binding airline.name}"/>
+            <TextBlock Text="{Binding airport.destination.name}"/>
+            <TextBlock Text="{Binding airport.destination.position.country.name}"/>
+            <TextBlock Text="{Binding airport.origin.name}"/>
+            <TextBlock Text="{Binding airport.origin.position.country.name}"/>
+            <TextBlock Text="{Binding status.text}"/>
+            <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
+        <DatePicker Binding.SourceUpdated="DatePicker_SourceUpdated"  HorizontalAlignment="Left" Margin="379,449,0,0" VerticalAlignment="Top"/>
+
 
 
     </Grid>

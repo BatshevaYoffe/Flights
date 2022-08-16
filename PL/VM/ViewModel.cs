@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Threading;
 using static FlightModel.FlightInfo;
 
 namespace PL.VM
@@ -24,6 +25,9 @@ namespace PL.VM
         public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
+        public FlightInfoPartial SelectedFlight { get; private set; }
+        public FlightInfoPartial flight { get; private set; }
+
 
         IBL bl = new BLImp();
         private FlightInfoPartialModel FIPModel;
@@ -52,6 +56,7 @@ namespace PL.VM
             ReadAll = new ShowFlightsCommand();
             ReadAll.read += ShowAllFlights;
             ReadAll.read += AllFlightsOnMap;
+            ReadAll.read += Button_Click_1;
 
             this.myMap = myMap;
             this.resources = resources;
@@ -126,38 +131,13 @@ namespace PL.VM
         {
             foreach(FlightInfoPartial flight in FIPModel.InComingflights)
                 InComingFlights.Add(flight);
+
             foreach(FlightInfoPartial flight in FIPModel.OutGoingflights)
                 OutGoingFlights.Add(flight);
             
         }
 
 
-
-
-        //public List<FlightInfoPartial> deleteNullFromList(string category)
-        //{
-        //    List<FlightInfoPartial> list = null;
-        //    if (category == "incoming")
-        //        list = bl.GetCurrentInComingFlights();
-        //    if (category == "outgoing")
-        //        list = bl.GetCurrentOutGoingFlights();
-        //    try 
-        //    {
-        //        foreach (FlightInfoPartial flight in list)
-        //        {
-        //            if (flight.FlightCode == "" || flight.Destination == "")
-        //                list.Remove(flight);
-
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Debug.Print(e.Message);
-        //    }
-        //    return list;
-
-
-        //}
         public FlightInfo.Root VmGetFlightData(string sourceId)
         {
             FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
@@ -176,8 +156,13 @@ namespace PL.VM
         {
             bl.BLSaveFlight(flightRoot);
         }
+
         public void UpdateFlight(FlightInfoPartial selected)
         {
+            if(selected == null)
+            {
+                return;
+            }
             //AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(Flight);
@@ -253,9 +238,26 @@ namespace PL.VM
             {
                 polyline.Locations.Add(new Location(item.lat, item.lng));
             }
-
+            if(color==System.Windows.Media.Colors.Green)
+            {
+               // myMap.Children.Clear();
+            }
             //  myMap.Children.Clear();
             myMap.Children.Add(polyline);
         }
+        private void Button_Click_1()
+        {
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 15);
+            dispatcherTimer.Start();
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            ShowAllFlights();
+            //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
+        }
     }
+
 }

@@ -71,95 +71,16 @@ namespace PL
             vm.UpdateFlight(SelectedFlight);
 
         }
-
-        private void UpdateFlight(FlightInfoPartial selected)
+        private void Pin_MouseDown(object sender, MouseButtonEventArgs e)
         {
-             //AsynchronicTrafficAdapter dal = new AsynchronicTrafficAdapter();
-            var Flight = vm.VmGetFlightData(selected.SourceId);
-            vm.SaveFlightInDB(Flight);
-            
-            DetailsPanel.DataContext = Flight;
-            // Update map
-            if (Flight != null)
-            {
-                //var OrderedPlaces = (from f in Flight.trail
-                //                     orderby f.ts
-                //                     select f).ToList<Trail>();
-
-                List < FlightInfo.Trail > OrderedPlaces = vm.OrderPlacesOfFlight(selected.SourceId);
-                addNewPolyLine(OrderedPlaces);
-
-                //MessageBox.Show(Flight.airport.destination.code.iata);
-                Trail CurrentPlace = null;
-
-                Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
-                Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
-               // Pushpin PinDestination = new Pushpin { ToolTip = Flight.airport.origin.name };
-
-
-                PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
-                MapLayer.SetPositionOrigin(PinCurrent, origin);
-
-
-                //Better to use RenderTransform
-                if (Flight.airport.destination.code.iata == "TLV")
-                {
-                    PinCurrent.Style = (Style)Resources["ToIsrael"];
-                }
-                else
-                {
-                    PinCurrent.Style = (Style)Resources["FromIsrael"];
-                }
-
-                CurrentPlace = OrderedPlaces.Last<Trail>();
-                var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinCurrent.Location = PlaneLocation;
-
-
-                CurrentPlace = OrderedPlaces.First<Trail>();
-                PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinOrigin.Location = PlaneLocation;
-
-                //CurrentPlace = OrderedPlaces.First<Trail>();
-                //PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-               // PinDestination.Location = PlaneLocation;
-
-                //PinCurrent.MouseDown += Pin_MouseDown;
-                
-                myMap.Children.Add(PinOrigin);
-                myMap.Children.Add(PinCurrent);
-               // myMap.Children.Add(PinDestination);
-
-            }
+            var pin = e.OriginalSource as Pushpin;
+            MessageBox.Show(pin.ToolTip.ToString());
         }
-            private void Pin_MouseDown(object sender, MouseButtonEventArgs e)
-            {
-                var pin = e.OriginalSource as Pushpin;
-                MessageBox.Show(pin.ToolTip.ToString());
-            }
 
 
-            void addNewPolyLine(List<Trail> Route)
-            {
-                MapPolyline polyline = new MapPolyline();
-                //polyline.Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
-                polyline.Stroke = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Green);
-                polyline.StrokeThickness = 1;
-                polyline.Opacity = 0.7;
-                polyline.Locations = new LocationCollection();
-                foreach (var item in Route)
-                {
-                    polyline.Locations.Add(new Location(item.lat, item.lng));
-                }
-
-              //  myMap.Children.Clear();
-                myMap.Children.Add(polyline);
-            }
-
-        private void ben(object sender, DpiChangedEventArgs e)
+        private void DatePicker_SourceUpdated(object sender, DataTransferEventArgs e)
         {
-            Pushpin PinCurrent = new Pushpin { };
-            PinCurrent.Style = (Style)Resources["Airport"];
+
         }
     }
 }
