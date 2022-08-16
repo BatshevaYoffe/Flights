@@ -25,7 +25,6 @@ namespace PL.VM
 
         public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
-        public List<Pushpin> Pushpins;
         public ShowFlightsCommand ReadAll { get; set; }
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
@@ -84,16 +83,22 @@ namespace PL.VM
             if (Flight != null)
             {
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Blue);
+                if(SelectedFlight!=null && selected.SourceId==SelectedFlight.SourceId)
+                {
+                    addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
+
+                }
+                else
+                {
+                    addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Blue);
+
+                }
 
                 //MessageBox.Show(Flight.airport.destination.code.iata);
                 Trail CurrentPlace = null;
 
                 Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
-                myMap.Children.Remove(PinCurrent);
                 Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
-                // Pushpin PinDestination = new Pushpin { ToolTip = Flight.airport.origin.name };
-
 
                 PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
                 MapLayer.SetPositionOrigin(PinCurrent, origin);
@@ -118,14 +123,9 @@ namespace PL.VM
                 PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
                 PinOrigin.Location = PlaneLocation;
 
-                //CurrentPlace = OrderedPlaces.First<Trail>();
-                //PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                // PinDestination.Location = PlaneLocation;
-
                 //PinCurrent.MouseDown += Pin_MouseDown;
 
                 myMap.Children.Add(PinOrigin);
-                //Pushpins.Add(PinCurrent);
                 myMap.Children.Add(PinCurrent);
             }
 
@@ -168,6 +168,8 @@ namespace PL.VM
             {
                 return;
             }
+            SelectedFlight = selected;
+
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(Flight);
 
@@ -183,7 +185,7 @@ namespace PL.VM
                 //                     select f).ToList<Trail>();
 
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Green);
+                addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
 
                 //MessageBox.Show(Flight.airport.destination.code.iata);
                 Trail CurrentPlace = null;
@@ -260,7 +262,7 @@ namespace PL.VM
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            //myMap.Children.Clear();
+            myMap.Children.Clear();
             AllFlightsOnMap();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }

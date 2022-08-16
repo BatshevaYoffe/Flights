@@ -27,9 +27,6 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        FlightInfoPartial SelectedFlight = null; //Selected Flight
-
-         //VM.ViewModel vm =new VM.ViewModel();
         
         VM.ViewModel vm { get; set; }
 
@@ -37,23 +34,12 @@ namespace PL
         {
             InitializeComponent();
             vm = new VM.ViewModel(myMap,Resources, DetailsPanel);
-            //vm(myMap, Resources);
             this.DataContext = vm;
         }
 
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    //load current data
-        //    // this.DataContext = FlightKeys;
-        //    InFlightsListBox.DataContext = vm.deleteNullFromList("incoming");
-        //    OutFlightsListBox.DataContext =vm.deleteNullFromList("outgoing");
-
-        //}
-
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            SelectedFlight = e.AddedItems[0] as FlightInfoPartial; //InFlightsListBox.SelectedItem as FlightInfoPartial;
+            FlightInfoPartial SelectedFlight = e.AddedItems[0] as FlightInfoPartial; //InFlightsListBox.SelectedItem as FlightInfoPartial;
             vm.UpdateFlight(SelectedFlight);
 
         }
@@ -63,7 +49,7 @@ namespace PL
             MessageBox.Show(pin.ToolTip.ToString());
         }
 
-
+        //לוח שנה
         private void DatePicker_SourceUpdated(object sender, DataTransferEventArgs e)
         {
 
