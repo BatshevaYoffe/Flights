@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\FlightInfoPartialModel.cs" />
+    <Compile Include="Model\HebCalModel.cs" />
     <Compile Include="VM\Command\ShowFlightsCommand.cs" />
     <Compile Include="VM\Converters\TickToDateTimeConverter.cs" />
     <Compile Include="VM\ViewModel.cs" />
@@ -114,6 +115,10 @@
     <ProjectReference Include="..\FlightModel\FlightModel.csproj">
       <Project>{2BF381C2-34E4-4AED-A46A-52808DCEF619}</Project>
       <Name>FlightModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HebDates\HebDates.csproj">
+      <Project>{279a777c-fcfc-44c9-9385-caf676f97605}</Project>
+      <Name>HebDates</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

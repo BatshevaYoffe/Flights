@@ -1,4 +1,4 @@
-﻿using HebDades;
+﻿using HebDates;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace DAL
                 var yyyy = date.ToString("yyyy");
                 var mm = date.ToString("MM");
                 var dd = date.ToString("dd");
-                string URL1 = $"https://www.hebcal.com/converter?cfg=json&date={yyyy}-{mm}-{dd}&g2h=1&strict=1";
+               // string URL1 = $"https://www.hebcal.com/converter?cfg=json&date={yyyy}-{mm}-{dd}&g2h=1&strict=1";
                 string URL = $"https://www.hebcal.com/converter?cfg=json&date=(yyyy)-(mm)-(dd)&g2h=1&strict=1";
                 var json = await webClient.DownloadStringTaskAsync(URL);
                 Root Date = JsonConvert.DeserializeObject<Root>(json);

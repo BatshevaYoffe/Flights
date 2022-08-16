@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89109F97-6D45-4D98-AA01-D705CBC12151}</ProjectGuid>
+    <ProjectGuid>{279A777C-FCFC-44C9-9385-CAF676F97605}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HebDades</RootNamespace>
-    <AssemblyName>HebDades</AssemblyName>
+    <RootNamespace>HebDates</RootNamespace>
+    <AssemblyName>HebDates</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateAndStatus.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
