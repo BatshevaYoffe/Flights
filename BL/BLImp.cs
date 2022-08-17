@@ -6,19 +6,17 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Weather;
 
 namespace BL
 {
     public class BLImp : IBL
     {
         AsynchronicTrafficAdapter asynchronicTrafficAdapter = new AsynchronicTrafficAdapter();
-        AsynchronicHebCal asynchronicHebCal = new AsynchronicHebCal();
-        AsynchroinicWheaterData asynchroinicWheaterData = new AsynchroinicWheaterData();
+        AsynchronicHebCal asynchronicHebCal=new AsynchronicHebCal();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
             var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
-
+            
             try
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Outgoing"])
@@ -54,24 +52,17 @@ namespace BL
         }
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
-            return asynchronicTrafficAdapter.GetFlightData(SourceId);
+             return asynchronicTrafficAdapter.GetFlightData(SourceId);
         }
         public void BLSaveFlight(FlightInfoPartial flight)
         {
-
-            ConectionToTheDataBase conectionToDB = new ConectionToTheDataBase();
-            conectionToDB.AddFlight(flight);
+            Program conectionToDB = new Program();
+            conectionToDB.AddFlight(flight);    
         }
-        public async Task<string> ReturnStatusOfDate(DateTime date)
+        public string ReturnStatusOfDate(DateTime date)
         {
-            string status = await asynchronicHebCal.GetStatusOfDate(date);
-            return status;
-
-        }
-        public async Task<WeatherRoot> ReturnWeatherBl(double lat,double lon)
-        {
-            WeatherRoot weatherRoot =  await asynchroinicWheaterData.RetuenWeatherData(lat, lon);
-            return weatherRoot;
+            //string status = await AsynchronicHebCal.GetStatusOfDate(date);
+            return "bkfb";
         }
     }
 }

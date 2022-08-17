@@ -13,13 +13,13 @@ namespace PL.Model
         IBL bl = new BLImp();
         public List<FlightInfo.Root> FlightsInformation=null;
 
-       public FlightInfo.Root GetDataOfFlightFromModel(string sourceId)
+       public FlightInfo.Root GetDataOfFlightFromModel(string flightCode)
        {
             if (FlightsInformation!= null)
             {
                 foreach (FlightInfo.Root f in FlightsInformation)
                 {
-                    if (f!=null&& sourceId == f.identification.callsign)
+                    if (f!=null&&flightCode == f.identification.callsign)
                         return f;
                 }
             }
@@ -27,7 +27,7 @@ namespace PL.Model
             {
                 FlightsInformation = new List<FlightInfo.Root>();
             }
-            FlightInfo.Root flightRoot = bl.GetDataofOneFlight(sourceId);
+            FlightInfo.Root flightRoot = bl.GetDataofOneFlight(flightCode);
             FlightsInformation.Add(flightRoot);
                 return flightRoot;
 
