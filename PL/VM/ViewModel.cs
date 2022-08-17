@@ -270,6 +270,7 @@ namespace PL.VM
             AllFlightsOnMap();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
+        ////Wether
     }
 
 }
