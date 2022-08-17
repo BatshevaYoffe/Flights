@@ -11,12 +11,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using static FlightModel.FlightInfo;
+using System.Threading.Tasks;
 
 namespace PL.VM
 {
@@ -61,9 +61,9 @@ namespace PL.VM
             this.detailsPanel = detailsPanel;
             this.todayDateStatus = todayStatus;
         }
-        public void ShowDateStatus()
+        public async void ShowDateStatus()
         {
-            todayDateStatus.DataContext=hebCalModel.ReturnStatusOfDate(DateTime.Today);
+            todayDateStatus.DataContext= await hebCalModel.ReturnStatusOfDate(DateTime.Today);
         }
         private void AllFlightsOnMap()
         {
@@ -106,7 +106,7 @@ namespace PL.VM
 
 
                 //Better to use RenderTransform
-                if (Flight.airport.destination.code.iata == "TLV")
+                if (Flight.airport.destination!=null &&Flight.airport.destination.code.iata == "TLV")
                 {
                     PinCurrent.Style = (Style)resources["ToIsrael"];
                 }
