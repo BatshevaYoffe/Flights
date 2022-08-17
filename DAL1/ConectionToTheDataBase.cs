@@ -30,7 +30,7 @@ namespace DAL1
                     Destination = flight.Destination,
                 };
 
-                if (ctx.Flights.Any(o => o.FlightCode == flight.FlightCode))
+                if (ctx.Flights.Any(o => o.SourceId == flight.SourceId))
                 {
                     return;
                 }
