@@ -50,6 +50,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -68,14 +70,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DatesAndFlightsWindow.xaml.cs">
+      <DependentUpon>DatesAndFlightsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\FlightInfoPartialModel.cs" />
     <Compile Include="Model\FlightInfoRootModel.cs" />
     <Compile Include="Model\HebCalModel.cs" />
+    <Compile Include="Model\WeatherDataModel.cs" />
+    <Compile Include="VM\Command\OpenDAFWindowCommand.cs" />
     <Compile Include="VM\Command\ShowFlightsCommand.cs" />
     <Compile Include="VM\Command\ShowWeatherCommand.cs" />
     <Compile Include="VM\Converters\TickToDateTimeConverter.cs" />
     <Compile Include="VM\ViewModel.cs" />
-    <Compile Include="WeatherDataModel.cs" />
+    <Page Include="DatesAndFlightsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

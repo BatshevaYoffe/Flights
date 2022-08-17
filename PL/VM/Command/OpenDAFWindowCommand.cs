@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-
 namespace PL.VM.Command
 {
-    public class ShowFlightsCommand : ICommand
+
+    public class OpenDAFWindowCommand : ICommand
     {
 
         public event Action read;
-        
+
 
         public event EventHandler CanExecuteChanged
         {
@@ -22,11 +22,12 @@ namespace PL.VM.Command
 
         public bool CanExecute(object parameter)
         {
-            
-            return true ;
+
+            return true;
         }
-        
+
         public void Execute(object parameter) => read();
 
     }
 }
+    

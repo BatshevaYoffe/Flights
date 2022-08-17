@@ -18,17 +18,7 @@ namespace DAL1
             {
 
 
-                var flight1 = new Flight()
-                {
-                    Id = flight.Id,
-                    Source = flight.Source,
-                    SourceId = flight.SourceId,
-                    Lat = flight.Lat,
-                    Long = flight.Long,
-                    DateTime = flight.DateTime,
-                    FlightCode = flight.FlightCode,
-                    Destination = flight.Destination,
-                };
+               
 
                 if (ctx.Flights.Any(o => o.SourceId == flight.SourceId))
                 {
@@ -37,7 +27,8 @@ namespace DAL1
 
 
 
-                ctx.Flights.Add(flight1);
+                
+                ctx.Flights.Add(flight);
                 ctx.SaveChanges();
 
             }
@@ -59,31 +50,15 @@ namespace DAL1
 
     public class FlightContext : DbContext
     {
-        public FlightContext() : base("FlightsDB1")
+        
+        public FlightContext() : base("FlightsDB")
         {
 
         }
 
-        public DbSet<Flight> Flights { get; set; }
+        public DbSet<FlightInfoPartial> Flights { get; set; }
 
     }
 
-    public class Flight
-    {//לתקן זה זמני לבדוק אם עובד בכלל
-        public int Id { get; set; }
-        public string SourceId { get; set; }
-        public double Long { get; set; }
-        public double Lat { get; set; }
-        public DateTime DateTime { get; set; }
-        public string Source { get; set; }
-        public string Destination { get; set; }
-        public string FlightCode { get; set; }
-        //public int Id { get; set; }
-        //public string FlightCode { get; set; }
-        //public string AircraftRegistration { get; set; }
-        //public string Airline { get; set; }
-        //public string Source { get; set; }
-        //public string Destination { get; set; }
-        //public DateTime DateTime { get; set; }
-    }
+    
 }

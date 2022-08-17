@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 
+
 namespace PL.VM.Command
 {
     public class ShowWeatherCommand : ICommand
     {
+
         public event Action read;
-
-
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
@@ -21,6 +21,7 @@ namespace PL.VM.Command
 
         public bool CanExecute(object parameter)
         {
+           
             return true;
         }
 

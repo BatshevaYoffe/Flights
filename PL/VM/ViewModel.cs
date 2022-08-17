@@ -29,7 +29,7 @@ namespace PL.VM
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
         public ShowFlightsCommand ShowWeather { get; set; }
-        public FlightInfoPartial SelectedFlight { get; private set; }
+        public FlightInfoPartial SelectedFlight { get; set; }
         public FlightInfoPartial flight { get; private set; }
         public DateAndStatus todayStatus { get; set; }
         public WeatherRoot weatherRootDestinatin { get; set; }
@@ -295,6 +295,8 @@ namespace PL.VM
         }
         public void BindingShowWheather()
         {
+            DatesAndFlightsWindow DAF=new DatesAndFlightsWindow();
+            DAF.Show(); 
 
         }
 
