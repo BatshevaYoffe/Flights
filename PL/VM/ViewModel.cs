@@ -54,12 +54,13 @@ namespace PL.VM
             ReadAll.read += ShowAllFlights;
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
-            ReadAll.read += ShowDateStatus;
+            
 
             this.myMap = myMap;
             this.resources = resources;
             this.detailsPanel = detailsPanel;
             this.todayDateStatus = todayStatus;
+            ShowDateStatus();
         }
         public async void ShowDateStatus()
         {
