@@ -1,4 +1,5 @@
 ﻿using BL;
+using Weather;
 using FlightModel;
 using HebDates;
 using Microsoft.Maps.MapControl.WPF;
@@ -27,14 +28,18 @@ namespace PL.VM
         public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
+        public ShowFlightsCommand ShowWeather { get; set; }
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
         public DateAndStatus todayStatus { get; set; }
+        public WeatherRoot weatherRootDestinatin { get; set; }
+        public WeatherRoot weatherRootSource { get; set; }
 
         IBL bl = new BLImp();
         private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
         private FlightInfoRootModel FIRModel;
+        private WeatherDataModel WDModel;
         private Map myMap;
         private ResourceDictionary resources;
         private StackPanel detailsPanel;
@@ -47,6 +52,7 @@ namespace PL.VM
             hebCalModel = new HebCalModel();
             FIPModel = new FlightInfoPartialModel();
             FIRModel = new FlightInfoRootModel();
+            WDModel = new WeatherDataModel();
             InComingFlights = new ObservableCollection<FlightInfoPartial>();
             OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
 
@@ -55,6 +61,8 @@ namespace PL.VM
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
             
+            ShowWeather = new ShowFlightsCommand();
+            ShowWeather.read += BindingShowWheather;
 
             this.myMap = myMap;
             this.resources = resources;
@@ -182,6 +190,7 @@ namespace PL.VM
             }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
+            SaveWeathetAtSourceAndDestination(Flight);
 
             detailsPanel.DataContext = Flight;
 
@@ -271,6 +280,22 @@ namespace PL.VM
             AllFlightsOnMap();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
-    }
+        
 
+
+
+
+
+        ///////////weather////
+        private async void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
+        {
+            weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+            weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+        }
+        public void BindingShowWheather()
+        {
+
+        }
+    }
+    
 }
