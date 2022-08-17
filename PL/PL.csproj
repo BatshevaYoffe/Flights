@@ -71,9 +71,7 @@
     <Compile Include="Model\FlightInfoPartialModel.cs" />
     <Compile Include="Model\FlightInfoRootModel.cs" />
     <Compile Include="Model\HebCalModel.cs" />
-    <Compile Include="Model\WeatherDataModel.cs" />
     <Compile Include="VM\Command\ShowFlightsCommand.cs" />
-    <Compile Include="VM\Command\ShowWeatherCommand.cs" />
     <Compile Include="VM\Converters\TickToDateTimeConverter.cs" />
     <Compile Include="VM\ViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -128,10 +126,6 @@
     <ProjectReference Include="..\HebDates\HebDates.csproj">
       <Project>{279a777c-fcfc-44c9-9385-caf676f97605}</Project>
       <Name>HebDates</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Weather\Weather.csproj">
-      <Project>{e117c711-116e-48f0-abb8-4a90d470d3a2}</Project>
-      <Name>Weather</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -15,14 +15,14 @@ namespace PL.Model
         public HebCalModel()
         {
         }
-        public async Task<HebDates.DateAndStatus> ReturnStatusOfDate(DateTime date)
+        public HebDates.DateAndStatus ReturnStatusOfDate(DateTime date)
         {
 
-           string status =await bl.ReturnStatusOfDate(date);
+           // string status = bl.ReturnStatusOfDate(date);
             var DS = new HebDates.DateAndStatus()
             {
                 Date = date,
-                Status = status,
+                Status = null,
             };
            
             return DS;

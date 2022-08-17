@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Weather;
 
 namespace BL
 {
@@ -14,7 +13,6 @@ namespace BL
         List<FlightInfoPartial> GetCurrentInComingFlights();
         FlightInfo.Root GetDataofOneFlight(string SourceId);
         void BLSaveFlight(FlightInfoPartial flight);
-        Task<string> ReturnStatusOfDate(DateTime date);
-        Task<WeatherRoot> ReturnWeatherBl(double lat, double lon);
+        string ReturnStatusOfDate(DateTime date);
     }
 }
