@@ -59,7 +59,6 @@
     <Compile Include="AsynchronicHebCal.cs" />
     <Compile Include="AsynchronicTrafficAdapter.cs" />
     <Compile Include="AsynchronicWeatherData.cs" />
-    <Compile Include="ConectionToDB.cs" />
     <Compile Include="ConectionToTheDataBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +75,10 @@
     <ProjectReference Include="..\HebDates\HebDates.csproj">
       <Project>{279A777C-FCFC-44C9-9385-CAF676F97605}</Project>
       <Name>HebDates</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Weather\Weather.csproj">
+      <Project>{95784b1e-72ff-4816-a44e-38a606539b39}</Project>
+      <Name>Weather</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

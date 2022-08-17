@@ -1,4 +1,5 @@
 ﻿using BL;
+using Weather;
 using FlightModel;
 using HebDates;
 using Microsoft.Maps.MapControl.WPF;
@@ -24,29 +25,34 @@ namespace PL.VM
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<FlightInfoPartial> InComingFlights {get;set;}
+        public ObservableCollection<FlightInfoPartial> InComingFlights { get; set; }
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
+        public ShowFlightsCommand ShowWeather { get; set; }
         public FlightInfoPartial SelectedFlight { get; private set; }
         public FlightInfoPartial flight { get; private set; }
         public DateAndStatus todayStatus { get; set; }
+        public WeatherRoot weatherRootDestinatin { get; set; }
+        public WeatherRoot weatherRootSource { get; set; }
 
         IBL bl = new BLImp();
         private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
         private FlightInfoRootModel FIRModel;
+        private WeatherDataModel WDModel;
         private Map myMap;
         private ResourceDictionary resources;
         private StackPanel detailsPanel;
         private StackPanel todayDateStatus;
 
-        
 
-        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel,StackPanel todayStatus)
+
+        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel, StackPanel todayStatus)
         {
             hebCalModel = new HebCalModel();
             FIPModel = new FlightInfoPartialModel();
             FIRModel = new FlightInfoRootModel();
+            WDModel = new WeatherDataModel();
             InComingFlights = new ObservableCollection<FlightInfoPartial>();
             OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
 
@@ -54,16 +60,20 @@ namespace PL.VM
             ReadAll.read += ShowAllFlights;
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
-            ReadAll.read += ShowDateStatus;
+
+            ShowWeather = new ShowFlightsCommand();
+            ShowWeather.read += BindingShowWheather;
+
 
             this.myMap = myMap;
             this.resources = resources;
             this.detailsPanel = detailsPanel;
             this.todayDateStatus = todayStatus;
+            ShowDateStatus();
         }
-        public void ShowDateStatus()
+        public async void ShowDateStatus()
         {
-            todayDateStatus.DataContext=hebCalModel.ReturnStatusOfDate(DateTime.Today);
+            todayDateStatus.DataContext = await hebCalModel.ReturnStatusOfDate(DateTime.Today);
         }
         private void AllFlightsOnMap()
         {
@@ -84,7 +94,7 @@ namespace PL.VM
             if (Flight != null)
             {
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                if(SelectedFlight!=null && selected.SourceId==SelectedFlight.SourceId)
+                if (SelectedFlight != null && selected.SourceId == SelectedFlight.SourceId)
                 {
                     addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
 
@@ -106,7 +116,7 @@ namespace PL.VM
 
 
                 //Better to use RenderTransform
-                if (Flight.airport.destination.code.iata == "TLV")
+                if (Flight.airport.destination != null && Flight.airport.destination.code.iata == "TLV")
                 {
                     PinCurrent.Style = (Style)resources["ToIsrael"];
                 }
@@ -135,59 +145,60 @@ namespace PL.VM
 
         public void ShowAllFlights()
         {
-            foreach(FlightInfoPartial flight in FIPModel.InComingflights)
+            foreach (FlightInfoPartial flight in FIPModel.InComingflights)
                 InComingFlights.Add(flight);
 
-            foreach(FlightInfoPartial flight in FIPModel.OutGoingflights)
+            foreach (FlightInfoPartial flight in FIPModel.OutGoingflights)
                 OutGoingFlights.Add(flight);
-            
+
         }
 
 
         public FlightInfo.Root VmGetFlightData(string sourceId)
         {
-            FlightInfo.Root Flight=FIRModel.GetDataOfFlightFromModel(sourceId);
-            return Flight;  
+            FlightInfo.Root Flight = FIRModel.GetDataOfFlightFromModel(sourceId);
+            return Flight;
         }
         public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
         {
-            FlightInfo.Root Flight =bl.GetDataofOneFlight(sourceId);
-            List<FlightInfo.Trail>  OrderedPlaces=(from f in Flight.trail
-                                     orderby f.ts
-                                     select f).ToList<FlightInfo.Trail>();
+            FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
+            List<FlightInfo.Trail> OrderedPlaces = (from f in Flight.trail
+                                                    orderby f.ts
+                                                    select f).ToList<FlightInfo.Trail>();
 
             return OrderedPlaces;
         }
         public void SaveFlightInDB(FlightInfoPartial flight)
         {
             FIPModel.save(flight);
-           // bl.BLSaveFlight(flightRoot);
+            // bl.BLSaveFlight(flightRoot);
         }
 
         public void UpdateFlight(FlightInfoPartial selected)
         {
-            
-            if(selected == null)
+
+            if (selected == null)
             {
                 return;
             }
 
             FlightInfoPartial PreviousChoice = SelectedFlight;
             SelectedFlight = selected;
-            if(PreviousChoice != null)
+            if (PreviousChoice != null)
             {
                 AddFlightToMap(PreviousChoice);
 
             }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
+            SaveWeathetAtSourceAndDestination(Flight);
 
             detailsPanel.DataContext = Flight;
 
             // Update map
             if (Flight != null)
             {
-                
+
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
                 addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
 
@@ -236,7 +247,7 @@ namespace PL.VM
         }
 
 
-        void addNewPolyLine(List<Trail> Route,Color color)
+        void addNewPolyLine(List<Trail> Route, Color color)
         {
             MapPolyline polyline = new MapPolyline();
             //polyline.Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
@@ -248,7 +259,7 @@ namespace PL.VM
             {
                 polyline.Locations.Add(new Location(item.lat, item.lng));
             }
-            if(color==System.Windows.Media.Colors.Green)
+            if (color == System.Windows.Media.Colors.Green)
             {
                 //myMap.Children.Remove(polyline);
             }
@@ -270,7 +281,24 @@ namespace PL.VM
             AllFlightsOnMap();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
-        ////Wether
+
+
+
+
+
+
+        ///////////weather////
+        private async void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
+        {
+            weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+            weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+        }
+        public void BindingShowWheather()
+        {
+
+        }
+
+
     }
 
 }

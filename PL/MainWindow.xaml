@@ -89,6 +89,7 @@
             <TextBlock Text="{Binding Date}" />
             <TextBlock Text="{Binding Status}"/>
         </StackPanel>
+        <Button Command="{ Binding ShowWeather}" Content="Show weather" HorizontalAlignment="Left" Height="36" Margin="343,10,0,0" VerticalAlignment="Top" Width="156"/>
 
 
     </Grid>

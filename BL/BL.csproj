@@ -54,6 +54,10 @@
       <Project>{2BF381C2-34E4-4AED-A46A-52808DCEF619}</Project>
       <Name>FlightModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Weather\Weather.csproj">
+      <Project>{95784b1e-72ff-4816-a44e-38a606539b39}</Project>
+      <Name>Weather</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
