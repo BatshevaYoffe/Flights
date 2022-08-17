@@ -6,13 +6,15 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Weather;
 
 namespace BL
 {
     public class BLImp : IBL
     {
         AsynchronicTrafficAdapter asynchronicTrafficAdapter = new AsynchronicTrafficAdapter();
-        AsynchronicHebCal asynchronicHebCal=new AsynchronicHebCal();
+        AsynchronicHebCal asynchronicHebCal = new AsynchronicHebCal();
+        AsynchroinicWheaterData asynchroinicWheaterData = new AsynchroinicWheaterData();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
             var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
@@ -56,13 +58,18 @@ namespace BL
         }
         public void BLSaveFlight(FlightInfoPartial flight)
         {
-            Program conectionToDB = new Program();
-            conectionToDB.AddFlight(flight);    
+            ConectionToTheDataBase conectionToDB = new ConectionToTheDataBase();
+            conectionToDB.AddFlight(flight);
         }
-        public string ReturnStatusOfDate(DateTime date)
+        public async Task<string> ReturnStatusOfDate(DateTime date)
         {
-            //string status = await AsynchronicHebCal.GetStatusOfDate(date);
-            return "bkfb";
+            string status = await asynchronicHebCal.GetStatusOfDate(date);
+            return status;
+        }
+        public async Task<WeatherRoot> ReturnWeatherBl(double lat, double lon)
+        {
+            WeatherRoot weatherRoot = await asynchroinicWheaterData.RetuenWeatherData(lat, lon);
+            return weatherRoot;
         }
     }
 }

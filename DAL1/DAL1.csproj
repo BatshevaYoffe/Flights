@@ -58,7 +58,9 @@
   <ItemGroup>
     <Compile Include="AsynchronicHebCal.cs" />
     <Compile Include="AsynchronicTrafficAdapter.cs" />
+    <Compile Include="AsynchronicWeatherData.cs" />
     <Compile Include="ConectionToDB.cs" />
+    <Compile Include="ConectionToTheDataBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
