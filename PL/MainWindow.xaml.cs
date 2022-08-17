@@ -1,5 +1,4 @@
 ﻿ using BL;
-using DAL;// אולי למחוק
 using FlightModel;
 using Microsoft.Maps.MapControl.WPF;
 using PL.VM.Command;

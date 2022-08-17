@@ -1,5 +1,4 @@
-﻿using Da;
-using DAL1;
+﻿using DAL1;
 using FlightModel;
 using System;
 using System.Collections.Generic;
@@ -58,7 +57,7 @@ namespace BL
         public void BLSaveFlight(FlightInfoPartial flight)
         {
             Program conectionToDB = new Program();
-            conectionToDB.addFlight(flight);    
+            conectionToDB.AddFlight(flight);    
         }
         public string ReturnStatusOfDate(DateTime date)
         {
