@@ -166,19 +166,23 @@ namespace PL.VM
 
         public void UpdateFlight(FlightInfoPartial selected)
         {
+            
             if(selected == null)
             {
                 return;
             }
-            //FlightInfoPartial PreviousChoice = SelectedFlight;
-            SelectedFlight = selected;
 
+            FlightInfoPartial PreviousChoice = SelectedFlight;
+            SelectedFlight = selected;
+            if(PreviousChoice != null)
+            {
+                AddFlightToMap(PreviousChoice);
+
+            }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
 
             detailsPanel.DataContext = Flight;
-
-
 
             // Update map
             if (Flight != null)

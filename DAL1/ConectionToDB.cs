@@ -8,29 +8,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DAL1
 {
     public class ConectionToDB
     {
-        static void Main(string[] args)
-        {
-            var f = new Flight()
-            {
-                Id = -1,
-                Source = "TLV",
-                Destination = "JFK",
-                FlightCode = "1111",
-                DateTime = DateTime.Today,
-                AircraftRegistration = "12-axxx",
-                Airline = "wizz"
+        //static void Main(string[] args)
+        //{
+        //    var f = new Flight1()
+        //    {
+        //        Id = -1,
+        //        Source = "TLV",
+        //        Destination = "JFK",
+        //        FlightCode = "1111",
+        //        DateTime = DateTime.Today,
+        //        AircraftRegistration = "12-axxx",
+        //        Airline = "wizz"
 
-            };
-            using (var ctx = new FlightContext())
-            {
-                ctx.Flights.Add(f);
-                ctx.SaveChanges();
-            }
-        }
+        //    };
+        //    using (var ctx = new FlightContext1())
+        //    {
+        //        ctx.Flights.Add(f);
+        //        ctx.SaveChanges();
+        //    }
+        //}
     }
         //public void addFlight(FlightInfoPartial flight)
         //{
@@ -77,17 +77,17 @@ namespace DAL
 
 
     //}
-    public class FlightContext : DbContext
+    public class FlightContext1 : DbContext
     {
-        public FlightContext() : base("FlightsDB")
+        public FlightContext1() : base("FlightsDB")
         {
             Database.SetInitializer<FlightContext>(new CreateDatabaseIfNotExists<FlightContext>());
         }
 
-        public DbSet<Flight> Flights { get; set; }
+        public DbSet<Flight1> Flights { get; set; }
 
     }
-    public class Flight
+    public class Flight1
     {
         public int Id { get; set; }
         public string FlightCode { get; set; }
