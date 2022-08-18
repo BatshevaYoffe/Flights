@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DatesAndFlightsWindow" Height="450" Width="800">
     <Grid>
-        <Button Command="{Binding SelectDates}" CommandParameter="{Binding ConverterParameter= }" Content="Select Dates" HorizontalAlignment="Left" Height="50" Margin="344,10,0,0" VerticalAlignment="Top" Width="172"/>
+        <Button Command="{Binding SelectDates}"  Content="Select Dates" HorizontalAlignment="Left" Height="50" Margin="344,10,0,0" VerticalAlignment="Top" Width="172"/>
         <Calendar HorizontalAlignment="Left" Margin="485,92,0,0" VerticalAlignment="Top" SelectedDatesChanged="selectedDates" x:Name="calender"/>
         
     </Grid>
