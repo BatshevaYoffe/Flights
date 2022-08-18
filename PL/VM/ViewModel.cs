@@ -28,7 +28,7 @@ namespace PL.VM
         public ObservableCollection<FlightInfoPartial> InComingFlights { get; set; }
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
-        public ShowFlightsCommand ShowWeather { get; set; }
+        public ShowFlightsCommand ShowHistory { get; set; }
         public FlightInfoPartial SelectedFlight { get; set; }
         public FlightInfoPartial flight { get; private set; }
         public DateAndStatus todayStatus { get; set; }
@@ -61,8 +61,8 @@ namespace PL.VM
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
 
-            ShowWeather = new ShowFlightsCommand();
-            ShowWeather.read += BindingShowWheather;
+            ShowHistory = new ShowFlightsCommand();
+            ShowHistory.read += BindingShowHistory;
 
 
             this.myMap = myMap;
@@ -293,7 +293,10 @@ namespace PL.VM
             weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
             weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
         }
-        public void BindingShowWheather()
+
+
+
+        public void BindingShowHistory()
         {
             DatesAndFlightsWindow DAF=new DatesAndFlightsWindow();
             DAF.Show(); 

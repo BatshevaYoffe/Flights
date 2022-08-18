@@ -19,9 +19,18 @@ namespace PL
     /// </summary>
     public partial class DatesAndFlightsWindow : Window
     {
+        VM.SelectDatesVM vm { get; set; }
         public DatesAndFlightsWindow()
         {
             InitializeComponent();
+            vm = new VM.SelectDatesVM();
+            this.DataContext = vm;
+        }
+
+        private void selectedDates(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
+    
 }

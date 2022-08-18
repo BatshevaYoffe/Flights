@@ -42,6 +42,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>-->
         <converters:TickToDateTimeConverter x:Key="TickConvert"/>
+       <!-- <converters:SelectedFlightForDateConverter x:Key="SelectedFlightConverter"/>-->
 
     </Window.Resources>
 
@@ -89,7 +90,10 @@
             <TextBlock Text="{Binding Date}" />
             <TextBlock Text="{Binding Status}"/>
         </StackPanel>
-        <Button Command="{ Binding ShowWeather}" Content="Show weather" HorizontalAlignment="Left" Height="36" Margin="343,10,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button Command="{ Binding ShowHistory}" Content="Show History" HorizontalAlignment="Left" Height="36" Margin="343,10,0,0" VerticalAlignment="Top" Width="156"/>
+
+
+
 
 
     </Grid>
