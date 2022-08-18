@@ -15,6 +15,7 @@ namespace PL.VM
     {
         private FlightInfoPartialModel FIPModel;
         public ObservableCollection<FlightInfoPartial> SelectedFlights;
+        public StackPanel detailsPanel;
 
         public SelectDatesVM(StackPanel detailsPanel)
         {
@@ -23,6 +24,8 @@ namespace PL.VM
 
             SelectDatesCommand SelectDates = new SelectDatesCommand();
             // SelectDates.read +=;
+
+            this.detailsPanel = detailsPanel;
         }
 
         public void FindFlightsAtRanreOfDates(DateTime FirstDate, DateTime LastDate)
@@ -36,6 +39,9 @@ namespace PL.VM
 
         }
 
-
+        public void ShowData(FlightInfoPartial selectedFlight)
+        {
+            detailsPanel.DataContext = selectedFlight;
+        }
     }
 }
