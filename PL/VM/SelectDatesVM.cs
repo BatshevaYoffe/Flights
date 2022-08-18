@@ -4,6 +4,7 @@ using PL.VM.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,9 @@ using System.Windows.Controls;
 
 namespace PL.VM
 {
-    public class SelectDatesVM
+    public class SelectDatesVM : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
         private FlightInfoPartialModel FIPModel;
         public ObservableCollection<FlightInfoPartial> SelectedFlights;
         public StackPanel detailsPanel;

@@ -35,7 +35,7 @@ namespace PL.VM
         public WeatherRoot weatherRootDestinatin { get; set; }
         public WeatherRoot weatherRootSource { get; set; }
 
-        IBL bl = new BLImp();
+   
         private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
         private FlightInfoRootModel FIRModel;
@@ -168,7 +168,7 @@ namespace PL.VM
         }
         public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
         {
-            FlightInfo.Root Flight = bl.GetDataofOneFlight(sourceId);
+            FlightInfo.Root Flight = FIRModel.GetDataOfFlightFromModel(sourceId);
             List<FlightInfo.Trail> OrderedPlaces = (from f in Flight.trail
                                                     orderby f.ts
                                                     select f).ToList<FlightInfo.Trail>();
@@ -266,10 +266,10 @@ namespace PL.VM
             {
                 polyline.Locations.Add(new Location(item.lat, item.lng));
             }
-            if (color == System.Windows.Media.Colors.Green)
-            {
-                //myMap.Children.Remove(polyline);
-            }
+            //if (color == System.Windows.Media.Colors.Green)
+            //{
+            //    //myMap.Children.Remove(polyline);
+            //}
 
 
             myMap.Children.Add(polyline);
