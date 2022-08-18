@@ -12,7 +12,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="C:\Users\Bat7\source\repos\Flights2\DAL\Images\airplane.png"  />
+                        <Image Source="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplane.png"  />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -21,7 +21,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="C:\Users\Bat7\source\repos\Flights2\DAL\Images\airplaneToIsrael.png"/>
+                        <Image Source="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplaneToIsrael.png"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -42,19 +42,27 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>-->
         <converters:TickToDateTimeConverter x:Key="TickConvert"/>
-       <!-- <converters:SelectedFlightForDateConverter x:Key="SelectedFlightConverter"/>-->
+        <!-- <converters:SelectedFlightForDateConverter x:Key="SelectedFlightConverter"/>-->
 
     </Window.Resources>
 
     <Grid Height="622" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="587*"/>
+            <ColumnDefinition Width="411*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="266*"/>
+            <RowDefinition Height="45*"/>
+        </Grid.RowDefinitions>
         <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
 
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
-               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,191" >
+               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,101" Grid.ColumnSpan="2" >
             <m:Pushpin Location="32.00581856838886, 34.885711609813164" />
             <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="30,344,0,0" RenderTransformOrigin="0.633,2.847"/>
         </m:Map>
-        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="159" VerticalAlignment="Top" Width="287" Margin="0,436,0,0">
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="159" VerticalAlignment="Top" Width="287" Margin="22,432,0,0" Grid.RowSpan="2">
             <TextBlock Text="{Binding aircraft.registration}"/>
             <TextBlock Text="{Binding airline.name}"/>
             <TextBlock Text="{Binding airport.destination.name}"/>
@@ -66,7 +74,7 @@
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
         <DatePicker  Binding.SourceUpdated="DatePicker_SourceUpdated"   HorizontalAlignment="Left" Margin="358,449,0,0" VerticalAlignment="Top" Height="28" Width="123" />
-        <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="771,483,0,0" >
+        <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="184,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -75,7 +83,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="537,483,0,0">
+        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="537,459,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -84,9 +92,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Incoming" HorizontalAlignment="Left" Margin="551,451,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
-        <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="774,446,0,0"/>
-        <StackPanel x:Name="TodayStatus" Margin="314,516,499,48" >
+        <Label Content="Incoming" HorizontalAlignment="Left" Margin="551,431,0,0" VerticalAlignment="Top" Height="26" Width="60" Grid.ColumnSpan="2"/>
+        <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="187,432,0,0" Grid.Column="1"/>
+        <StackPanel x:Name="TodayStatus" Margin="314,516,88,48" Grid.RowSpan="2" >
             <TextBlock Text="{Binding Date}" />
             <TextBlock Text="{Binding Status}"/>
         </StackPanel>

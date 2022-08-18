@@ -13,16 +13,19 @@ namespace PL.VM.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            
             var Result = string.Empty;
-            var IsOk = int.TryParse(value.ToString(), out int Ticks);
-
-            HelperClass Helper = new HelperClass();
-
-            if (IsOk)
+            if (value != null)
             {
-                Result = Helper.GetDataTimeFromEpoch(Ticks).ToString("dd-MM-yyyy HH:mm");
-            }
+                var IsOk = int.TryParse(value.ToString(), out int Ticks);
 
+                HelperClass Helper = new HelperClass();
+
+                if (IsOk)
+                {
+                    Result = Helper.GetDataTimeFromEpoch(Ticks).ToString("dd-MM-yyyy HH:mm");
+                }
+            }
             return Result;
         }
 
