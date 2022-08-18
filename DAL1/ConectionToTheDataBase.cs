@@ -33,18 +33,22 @@ namespace DAL1
 
             }
         }
+        public List<FlightInfoPartial> ReturnFlightsByDates(DateTime FDate, DateTime LDate)
+        {
+            List<FlightInfoPartial> flights = null;
+            using (var ctx = new FlightContext())
+            {
+                flights = (from f in ctx.Flights where (f.DateTime >= FDate &&f.DateTime<= LDate) select f).ToList<FlightInfoPartial>();
+                
+            }
+
+            return flights;
+        }
     }
 
 
-    ////  function to get flights that selected by date
-    //      public List<FlightInfoPartial> ReturnFlightByDate(DateTime dateTime)
-    //      {
-    //           using (var ctx = new FlightContext())
-    //           {
-    //          var flights = (from f in ctx.Flights where f.DateTime == dateTime select f).ToList<FlightInfoPartial>();
-    //          return flights;
-    //           }
-    //      }
+    
+    
 
 
 

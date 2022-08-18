@@ -6,9 +6,33 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DatesAndFlightsWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converters:TickToDateTimeConverter x:Key="TickConvert"/>
+    </Window.Resources>
     <Grid>
         <Button Command="{Binding SelectDates}"  Content="Select Dates" HorizontalAlignment="Left" Height="50" Margin="344,10,0,0" VerticalAlignment="Top" Width="172"/>
-        <Calendar HorizontalAlignment="Left" Margin="485,92,0,0" VerticalAlignment="Top" SelectedDatesChanged="selectedDates" x:Name="calender"/>
-        
+        <Calendar HorizontalAlignment="Left" Margin="461,83,0,0" VerticalAlignment="Top" SelectedDatesChanged="selectedDates" x:Name="calender" SelectionMode="SingleRange" Height="171" Width="198"/>
+
+        <ListBox  ItemsSource="{Binding SelectedFlights}" x:Name="SelectedFlights" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="49,35,0,0" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBlock Text="{Binding FlightCode}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="159" VerticalAlignment="Top" Width="287" Margin="0,436,0,0">
+            <TextBlock Text="{Binding aircraft.registration}"/>
+            <TextBlock Text="{Binding airline.name}"/>
+            <TextBlock Text="{Binding airport.destination.name}"/>
+            <TextBlock Text="{Binding airport.destination.position.country.name}"/>
+            <TextBlock Text="{Binding identification.callsign}"/>
+            <TextBlock Text="{Binding airport.origin.name}"/>
+            <TextBlock Text="{Binding airport.origin.position.country.name}"/>
+            <TextBlock Text="{Binding status.text}"/>
+            <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
+        </StackPanel>
+        <DatePicker  Binding.SourceUpdated="DatePicker_SourceUpdated"   HorizontalAlignment="Left" Margin="358,449,0,0" VerticalAlignment="Top" Height="28" Width="123" />
     </Grid>
 </Window>

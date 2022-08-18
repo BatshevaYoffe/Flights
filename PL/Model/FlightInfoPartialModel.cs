@@ -13,6 +13,7 @@ namespace PL.Model
         IBL bl = new BLImp();
         public List<FlightInfoPartial> InComingflights;
         public List<FlightInfoPartial> OutGoingflights;
+        public List<FlightInfoPartial> SelectedFlightsAtRangeOfDates;
         public FlightInfoPartialModel()
         {
             InComingflights = bl.GetCurrentInComingFlights();
@@ -22,6 +23,15 @@ namespace PL.Model
         public void save(FlightInfoPartial flight)
         {
             bl.BLSaveFlight(flight);
-        } 
+        }
+        public List<FlightInfoPartial> FlightByDates(DateTime firstDate, DateTime lastDate)
+        {
+            SelectedFlightsAtRangeOfDates=bl.GetSelectedFlightsByDates(firstDate, lastDate);
+            
+            return SelectedFlightsAtRangeOfDates;
+        }
+           
     }
+
+    
 }

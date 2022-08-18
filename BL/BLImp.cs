@@ -18,7 +18,7 @@ namespace BL
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
             var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
-            
+
             try
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Outgoing"])
@@ -54,7 +54,7 @@ namespace BL
         }
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
-             return asynchronicTrafficAdapter.GetFlightData(SourceId);
+            return asynchronicTrafficAdapter.GetFlightData(SourceId);
         }
         public void BLSaveFlight(FlightInfoPartial flight)
         {
@@ -71,5 +71,13 @@ namespace BL
             WeatherRoot weatherRoot = await asynchroinicWheaterData.RetuenWeatherData(lat, lon);
             return weatherRoot;
         }
+        public List<FlightInfoPartial> GetSelectedFlightsByDates(DateTime firstDate, DateTime lastDate)
+        {
+            ConectionToTheDataBase conectionToDB = new ConectionToTheDataBase();
+            var flights = conectionToDB.ReturnFlightsByDates(firstDate, lastDate);
+                return flights;
+
+        }
     }
 }
+
