@@ -114,16 +114,9 @@ namespace PL.VM
                 PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
                 MapLayer.SetPositionOrigin(PinCurrent, origin);
 
-
+                PinCurrent.Style = PlaneDirection(selected);
                 //Better to use RenderTransform
-                if (Flight.airport.destination != null && Flight.airport.destination.code.iata == "TLV")
-                {
-                    PinCurrent.Style = (Style)resources["ToIsrael"];
-                }
-                else
-                {
-                    PinCurrent.Style = (Style)resources["FromIsrael"];
-                }
+
 
                 CurrentPlace = OrderedPlaces.Last<Trail>();
                 var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
@@ -140,6 +133,20 @@ namespace PL.VM
                 myMap.Children.Add(PinCurrent);
             }
 
+
+        }
+
+        private Style PlaneDirection(FlightInfoPartial flight)
+        {
+            if ((flight.Destination == "TLV" && flight.Lat < 34.885857389453754) || (flight.Destination != "TLV" && flight.Lat > 34.885857389453754))
+            {
+                return (Style)resources["ToIsrael"];
+            }
+            else
+            {
+
+                return (Style)resources["FromIsrael"];
+            }
 
         }
 
