@@ -37,8 +37,10 @@ namespace PL
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FlightInfoPartial SelectedFlight = e.AddedItems[0] as FlightInfoPartial;
-            vm.showData(SelectedFlight);
+            vm.ShowData(SelectedFlight);
         }
+
+        
     }
     
 }

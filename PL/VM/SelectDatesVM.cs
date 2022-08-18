@@ -35,10 +35,7 @@ namespace PL.VM
             }
 
         }
-        public void ShowData(FlightInfoPartial Flight)
-        {
-
-        }
+        
 
 
     }
