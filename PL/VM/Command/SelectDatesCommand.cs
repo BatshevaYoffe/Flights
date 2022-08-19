@@ -21,7 +21,7 @@ namespace PL.VM.Command
         public bool CanExecute(object parameter)
         {
 
-            return false;
+            return true;
         }
 
         public void Execute(object parameter) => read();

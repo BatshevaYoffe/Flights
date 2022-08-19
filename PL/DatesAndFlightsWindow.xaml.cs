@@ -1,4 +1,5 @@
 ﻿using FlightModel;
+using PL.VM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class DatesAndFlightsWindow : Window
     {
-        VM.SelectDatesVM vm { get; set; }
+        SelectDatesVM vm { get; set; }
         public DatesAndFlightsWindow()
         {
             InitializeComponent();
@@ -28,11 +29,11 @@ namespace PL
             this.DataContext = vm;
         }
 
-        private void selectedDates(object sender, SelectionChangedEventArgs e)
-        {
-            //first e.AddedItems[0] 
-            vm.FindFlightsAtRanreOfDates();// DateTime.Today, DateTime.Today);
-        }
+        //private void selectedDates(object sender, SelectionChangedEventArgs e)
+        //{
+        //    //first e.AddedItems[0] 
+        //    vm.FindFlightsAtRanreOfDates();// DateTime.Today, DateTime.Today);
+        //}
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FlightInfoPartial SelectedFlight = e.AddedItems[0] as FlightInfoPartial;
