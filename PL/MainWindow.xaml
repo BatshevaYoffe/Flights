@@ -73,7 +73,6 @@
             <TextBlock Text="{Binding status.text}"/>
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
-        <DatePicker  Binding.SourceUpdated="DatePicker_SourceUpdated"   HorizontalAlignment="Left" Margin="562,14,0,0" VerticalAlignment="Top" Height="28" Width="123" Grid.ColumnSpan="2" />
         <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="224,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>

@@ -30,6 +30,11 @@ namespace PL.Model
             
             return SelectedFlightsAtRangeOfDates;
         }
+        public void RefreshListsOfFlights()
+        {
+            InComingflights = bl.GetCurrentInComingFlights();
+            OutGoingflights = bl.GetCurrentOutGoingFlights();
+        }
            
     }
 

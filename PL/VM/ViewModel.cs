@@ -78,6 +78,7 @@ namespace PL.VM
         }
         private void AllFlightsOnMap()
         {
+           
             foreach (FlightInfoPartial flight in InComingFlights)
             {
                 AddFlightToMap(flight);
@@ -160,6 +161,12 @@ namespace PL.VM
 
         public void ShowAllFlights()
         {
+            if (OutGoingFlights.Count > 0)
+            {
+                FIPModel.RefreshListsOfFlights();
+                OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
+                InComingFlights = new ObservableCollection<FlightInfoPartial>();
+            }
             foreach (FlightInfoPartial flight in FIPModel.InComingflights)
                 InComingFlights.Add(flight);
 
