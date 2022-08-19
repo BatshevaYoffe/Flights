@@ -32,7 +32,10 @@ namespace PL
         private void selectedDates(object sender, SelectionChangedEventArgs e)
         {
             List<DateTime> Dates=(sender as Calendar).SelectedDates.ToList();
-            vm.FindFlightsAtRangeOfDates(Dates.First,Dates.Last);
+            DateTime f = Dates[0];
+            DateTime l = Dates[Dates.Count-1];
+            vm.FindFlightsAtRangeOfDates(f,l);
+
         }
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

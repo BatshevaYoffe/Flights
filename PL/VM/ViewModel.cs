@@ -62,7 +62,7 @@ namespace PL.VM
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
 
-            ShowHistory = new ShowFlightsCommand();
+            ShowHistory = new ShowFlightsCommand();//שמתי לב שיש פה טעותתתתתתתתתתתתת
             ShowHistory.read += BindingShowHistory;
 
 
@@ -142,8 +142,7 @@ namespace PL.VM
         {
             RotateTransform r=new RotateTransform();
             Style style = new Style();
-            style = (Style)resources["ToIsrael"];
-            Image m = new Image();
+            var s =(resources["rightAirplane"]);
          
 
 
