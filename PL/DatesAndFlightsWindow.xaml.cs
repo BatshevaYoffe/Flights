@@ -31,7 +31,7 @@ namespace PL
         private void selectedDates(object sender, SelectionChangedEventArgs e)
         {
             //first e.AddedItems[0] 
-            vm.FindFlightsAtRanreOfDates(DateTime.Today, DateTime.Today);
+            vm.FindFlightsAtRanreOfDates();// DateTime.Today, DateTime.Today);
         }
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

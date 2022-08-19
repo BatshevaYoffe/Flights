@@ -18,19 +18,24 @@ namespace PL.VM
         private FlightInfoPartialModel FIPModel;
         public ObservableCollection<FlightInfoPartial> SelectedFlights;
         public StackPanel detailsPanel;
+        public OpenDAFWindowCommand SelectDates { get; set; }
+        public DateTime FirstDate;//=17/08/2022;
+        public DateTime LastDate;
+
 
         public SelectDatesVM(StackPanel detailsPanel)
         {
             FIPModel = new FlightInfoPartialModel();
             SelectedFlights = new ObservableCollection<FlightInfoPartial>();
 
-            SelectDatesCommand SelectDates = new SelectDatesCommand();
+            SelectDates.read += FindFlightsAtRanreOfDates;
+            //SelectDatesCommand SelectDates = new SelectDatesCommand();
             // SelectDates.read +=;
 
             this.detailsPanel = detailsPanel;
         }
 
-        public void FindFlightsAtRanreOfDates(DateTime FirstDate, DateTime LastDate)
+        public void FindFlightsAtRanreOfDates()//DateTime FirstDate, DateTime LastDate)
         {
             var flights = FIPModel.FlightByDates(FirstDate, LastDate);
             if (flights!= null)

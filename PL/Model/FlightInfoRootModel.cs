@@ -30,9 +30,6 @@ namespace PL.Model
             FlightInfo.Root flightRoot = bl.GetDataofOneFlight(sourceId);
             FlightsInformation.Add(flightRoot);
                 return flightRoot;
-
-
-
-       }
+        }
     }
 }

@@ -138,9 +138,10 @@ namespace PL.VM
 
         private Style PlaneDirection(FlightInfoPartial flight)
         {
+            RotateTransform myRotateTransform = new RotateTransform();
             if ((flight.Destination == "TLV" && flight.Lat < 34.885857389453754) || (flight.Destination != "TLV" && flight.Lat > 34.885857389453754))
             {
-                return (Style)resources["ToIsrael"];
+                return ((Style)(resources["ToIsrael"]));
             }
             else
             {
@@ -198,7 +199,7 @@ namespace PL.VM
             }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
-            SaveWeathetAtSourceAndDestination(Flight);
+           // SaveWeathetAtSourceAndDestination(Flight);
 
             detailsPanel.DataContext = Flight;
 
@@ -286,6 +287,7 @@ namespace PL.VM
         {
             myMap.Children.Clear();
             AllFlightsOnMap();
+            ShowAllFlights();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
 
