@@ -15,7 +15,7 @@ namespace DAL1
         {
             using (var webClient = new System.Net.WebClient())
             {
-                string URL = $"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={Key}";
+                string URL = $"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={Key}&units=metric";
                 var json = await webClient.DownloadStringTaskAsync(URL);
                 WeatherRoot weather = JsonConvert.DeserializeObject<WeatherRoot>(json);
                 return weather;

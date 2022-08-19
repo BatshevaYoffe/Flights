@@ -76,6 +76,7 @@
     <Compile Include="Model\FlightInfoPartialModel.cs" />
     <Compile Include="Model\FlightInfoRootModel.cs" />
     <Compile Include="Model\HebCalModel.cs" />
+    <Compile Include="Model\RangeOfDatesModel.cs" />
     <Compile Include="Model\WeatherDataModel.cs" />
     <Compile Include="VM\Command\OpenDAFWindowCommand.cs" />
     <Compile Include="VM\Command\SelectDatesCommand.cs" />
