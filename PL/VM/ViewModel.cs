@@ -18,6 +18,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Threading;
 using static FlightModel.FlightInfo;
+using System.Windows.Media.Media3D;
 
 namespace PL.VM
 {
@@ -138,7 +139,13 @@ namespace PL.VM
 
         private Style PlaneDirection(FlightInfoPartial flight)
         {
-            RotateTransform myRotateTransform = new RotateTransform();
+            RotateTransform r=new RotateTransform();
+            Style style = new Style();
+            style = (Style)resources["ToIsrael"];
+            Image m = new Image();
+         
+
+
             if ((flight.Destination == "TLV" && flight.Lat < 34.885857389453754) || (flight.Destination != "TLV" && flight.Lat > 34.885857389453754))
             {
                 return ((Style)(resources["ToIsrael"]));

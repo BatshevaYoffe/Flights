@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="622" Width="998">
+        Title="Flights by Naama and Batsheva" Height="622" Width="998" Icon="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplaneToIsrael.png">
     <Window.Resources>
         <Style TargetType="m:Pushpin" x:Key="FromIsrael">
             <Setter Property="Template">
@@ -56,16 +56,16 @@
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
         <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
-        <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="274,444,0,0" RenderTransformOrigin="0.633,2.847"/>
+        <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="4,419,0,0" RenderTransformOrigin="0.633,2.847"/>
 
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
-               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,101" Grid.ColumnSpan="2" >
+               Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,118" Grid.ColumnSpan="2" >
             <m:Pushpin Location="32.00581856838886, 34.885711609813164" />
         </m:Map>
-        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="159" VerticalAlignment="Top" Width="287" Margin="22,432,0,0" Grid.RowSpan="2">
-            <TextBlock Text="{Binding aircraft.registration}"/>
-            <TextBlock Text="{Binding airline.name}"/>
-            <TextBlock Text="{Binding airport.destination.name}"/>
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Center" Height="159" VerticalAlignment="Top" Width="287" Margin="0,424,0,0" Grid.RowSpan="2">
+            <TextBlock Text="{Binding Path=aircraft.registration,StringFormat='registration: {0}'}"  />
+            <TextBlock Text="{Binding Path=airline.name,StringFormat='Airline Name: {0}'}"/>
+            <TextBlock Text="{Binding Path=airport.destination.name,StringFormat= 'Airport destination: {0}'}"/>
             <TextBlock Text="{Binding airport.destination.position.country.name}"/>
             <TextBlock Text="{Binding identification.callsign}"/>
             <TextBlock Text="{Binding airport.origin.name}"/>
@@ -73,8 +73,8 @@
             <TextBlock Text="{Binding status.text}"/>
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
-        <DatePicker  Binding.SourceUpdated="DatePicker_SourceUpdated"   HorizontalAlignment="Left" Margin="358,449,0,0" VerticalAlignment="Top" Height="28" Width="123" />
-        <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="184,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
+        <DatePicker  Binding.SourceUpdated="DatePicker_SourceUpdated"   HorizontalAlignment="Left" Margin="562,14,0,0" VerticalAlignment="Top" Height="28" Width="123" Grid.ColumnSpan="2" />
+        <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="224,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -83,7 +83,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="537,459,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <ListBox ItemsSource="{Binding InComingFlights}" x:Name="InFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="32,459,0,0" Grid.RowSpan="2" Grid.Column="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -92,17 +92,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Incoming" HorizontalAlignment="Left" Margin="551,431,0,0" VerticalAlignment="Top" Height="26" Width="60" Grid.ColumnSpan="2"/>
-        <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="187,432,0,0" Grid.Column="1"/>
-        <StackPanel x:Name="TodayStatus" Margin="314,516,88,48" Grid.RowSpan="2" >
+        <Label Content="Incoming" HorizontalAlignment="Left" Margin="38,431,0,0" VerticalAlignment="Top" Height="26" Width="60" Grid.Column="1"/>
+        <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="227,432,0,0" Grid.Column="1"/>
+        <StackPanel x:Name="TodayStatus" Margin="182,8,123,484" Grid.Column="1" >
             <TextBlock Text="{Binding Date}" />
             <TextBlock Text="{Binding Status}"/>
         </StackPanel>
         <Button Command="{ Binding ShowHistory}" Content="Show History" HorizontalAlignment="Left" Height="36" Margin="343,10,0,0" VerticalAlignment="Top" Width="156"/>
-
-
-
-
-
     </Grid>
 </Window>
