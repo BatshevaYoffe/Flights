@@ -37,40 +37,50 @@ namespace PL.VM
 
             this.detailsPanel = detailsPanel;
         }
-        public DateTime FromDate
-        {
-            
-            get
-            {
-                return RODModel.FromDate;
-            }
-            set
-            {
-                RODModel.FromDate = value;
-                OnPropertyChanged("dateFrom");
-            }
-        }
-        public DateTime UntilDate
-        {
-            get
-            {
-                return RODModel.UntilDate;
-            }
-            set
-            {
-                RODModel.UntilDate = value;
-                OnPropertyChanged("dateUntil");
-            }
-        }
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
+        //public DateTime FromDate
+        //{
 
-        public void FindFlightsAtRangeOfDates()
+        //    get
+        //    {
+        //        return RODModel.FromDate;
+        //    }
+        //    set
+        //    {
+        //        RODModel.FromDate = value;
+        //        OnPropertyChanged("dateFrom");
+        //    }
+        //}
+        //public DateTime UntilDate
+        //{
+        //    get
+        //    {
+        //        return RODModel.UntilDate;
+        //    }
+        //    set
+        //    {
+        //        RODModel.UntilDate = value;
+        //        OnPropertyChanged("dateUntil");
+        //    }
+        //}
+        //protected void OnPropertyChanged([CallerMemberName] string name = null)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        //}
+
+        //public void FindFlightsAtRangeOfDates()
+        //{
+        //    var flights = FIPModel.FlightByDates(FromDate,UntilDate);
+        //    if (flights!= null)
+        //    {
+        //        foreach (FlightInfoPartial flight in flights)
+        //            SelectedFlights.Add(flight);
+        //    }
+
+        //}
+        public void FindFlightsAtRangeOfDates(DateTime FromDate,DateTime UntilDate)
         {
-            var flights = FIPModel.FlightByDates(FromDate,UntilDate);
-            if (flights!= null)
+            var flights = FIPModel.FlightByDates(FromDate, UntilDate);
+            if (flights != null)
             {
                 foreach (FlightInfoPartial flight in flights)
                     SelectedFlights.Add(flight);

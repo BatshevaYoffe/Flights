@@ -29,11 +29,11 @@ namespace PL
             this.DataContext = vm;
         }
 
-        //private void selectedDates(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //first e.AddedItems[0] 
-        //    vm.FindFlightsAtRanreOfDates();// DateTime.Today, DateTime.Today);
-        //}
+        private void selectedDates(object sender, SelectionChangedEventArgs e)
+        {
+            List<DateTime> Dates=(sender as Calendar).SelectedDates.ToList();
+            vm.FindFlightsAtRangeOfDates(Dates.First,Dates.Last);
+        }
         private void FlightsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FlightInfoPartial SelectedFlight = e.AddedItems[0] as FlightInfoPartial;

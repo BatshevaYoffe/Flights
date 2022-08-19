@@ -11,7 +11,7 @@
 
     <Grid>
         <DatePicker SelectedDate="{Binding Path=FromDate, Mode=TwoWay}" Name="dateFrom"   HorizontalAlignment="Left" Margin="552,83,0,0" VerticalAlignment="Top"   Height="28" Width="107"/>
-        <DatePicker SelectedDate="{Binding Path=UntilDate, Mode=TwoWay}" Name="dateUntil"  HorizontalAlignment="Left" Margin="552,247,0,0" VerticalAlignment="Top"  Height="28" Width="107"/>
+        <DatePicker SelectedDate="{Binding Path=UntilDate, Mode=TwoWay}" Name="dateUntil"  HorizontalAlignment="Left" Margin="552,139,0,0" VerticalAlignment="Top"  Height="28" Width="107"/>
         <Button Command="{Binding SelectDates}"  Content="Select Dates" HorizontalAlignment="Left" Height="50" Margin="344,10,0,0" VerticalAlignment="Top" Width="172"/>
 
 
@@ -35,6 +35,7 @@
             <TextBlock Text="{Binding status.text}"/>
             <!--<TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>-->
         </StackPanel>
+        <Calendar HorizontalAlignment="Left" Margin="584,247,0,0" VerticalAlignment="Top" x:Name="Selected_Range_of_dates" SelectionMode="SingleRange" SelectedDatesChanged="selectedDates"/>
 
 
 
