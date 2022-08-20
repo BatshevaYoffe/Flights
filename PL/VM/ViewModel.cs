@@ -29,7 +29,7 @@ namespace PL.VM
         public ObservableCollection<FlightInfoPartial> InComingFlights { get; set; }
         public ObservableCollection<FlightInfoPartial> OutGoingFlights { get; set; }
         public ShowFlightsCommand ReadAll { get; set; }
-        public ShowFlightsCommand ShowHistory { get; set; }
+        public OpenDAFWindowCommand ShowHistory { get; set; }
         public FlightInfoPartial SelectedFlight { get; set; }
         public FlightInfoPartial flight { get; private set; }
         public DateAndStatus todayStatus { get; set; }
@@ -62,7 +62,7 @@ namespace PL.VM
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
 
-            ShowHistory = new ShowFlightsCommand();//שמתי לב שיש פה טעותתתתתתתתתתתתת
+            ShowHistory = new OpenDAFWindowCommand();
             ShowHistory.read += BindingShowHistory;
 
 
@@ -163,8 +163,8 @@ namespace PL.VM
             if (OutGoingFlights.Count > 0)
             {
                 FIPModel.RefreshListsOfFlights();
-                OutGoingFlights = new ObservableCollection<FlightInfoPartial>();
-                InComingFlights = new ObservableCollection<FlightInfoPartial>();
+                OutGoingFlights.Clear();
+                InComingFlights.Clear();
             }
             foreach (FlightInfoPartial flight in FIPModel.InComingflights)
                 InComingFlights.Add(flight);

@@ -12,12 +12,12 @@ namespace BL
 {
     public class BLImp : IBL
     {
-        AsynchronicTrafficAdapter asynchronicTrafficAdapter = new AsynchronicTrafficAdapter();
+        TrafficAdapter TrafficAdapter = new TrafficAdapter();
         AsynchronicHebCal asynchronicHebCal = new AsynchronicHebCal();
         AsynchroinicWheaterData asynchroinicWheaterData = new AsynchroinicWheaterData();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
-            var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
+            var FlightKeys = TrafficAdapter.GetCurrentFlights();
 
             try
             {
@@ -36,7 +36,7 @@ namespace BL
         }
         public List<FlightInfoPartial> GetCurrentInComingFlights()
         {
-            var FlightKeys = asynchronicTrafficAdapter.GetCurrentFlights();
+            var FlightKeys = TrafficAdapter.GetCurrentFlights();
             try
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Incoming"])
@@ -54,7 +54,7 @@ namespace BL
         }
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
-            return asynchronicTrafficAdapter.GetFlightData(SourceId);
+            return TrafficAdapter.GetFlightData(SourceId);
         }
         public void BLSaveFlight(FlightInfoPartial flight)
         {

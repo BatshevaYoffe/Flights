@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-        Title="Flights by Naama and Batsheva" Height="622" Width="998" Icon="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplaneToIsrael.png">
+        Title="Flights by Naama and Batsheva" Height="622" Width="998" Icon="C:\Users\97254\windowsProject\Flights\DAL1\Images\airplaneToIsrael.png">
     <Window.Resources>
         <Style TargetType="{x:Type m:Pushpin}" x:Key="rightAirplane">
             <Setter Property="Template">
@@ -25,7 +25,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplane.png"  />
+                        <Image Source="C:\Users\97254\windowsProject\Flights\DAL1\Images\airplane.png"  />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -34,7 +34,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="C:\Users\Bat7\Source\Repos\Flight1\DAL1\Images\airplaneToIsrael.png"/>
+                        <Image Source="C:\Users\97254\windowsProject\Flights\DAL1\Images\airplaneToIsrael.png"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -43,7 +43,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Image Source="C:\Users\Bat7\source\repos\Flights2\DAL\Images\header__logo-icon.png"/>
+                        <Image Source="C:\Users\97254\windowsProject\Flights\DAL1\Images\header__logo-icon.png"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -68,8 +68,8 @@
             <RowDefinition Height="266*"/>
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
-        <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="101,10,0,0" VerticalAlignment="Top" Width="89"  RenderTransformOrigin="0.322,1.237"/>
-        <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="4,419,0,0" RenderTransformOrigin="0.633,2.847"/>
+        <Button Command="{Binding ReadAll}" Content="Read All" HorizontalAlignment="Left" Height="36" Margin="429,10,0,0" VerticalAlignment="Top" Width="148"  RenderTransformOrigin="0.322,1.237" Background="DeepSkyBlue" FontSize="20" FontStyle="Italic"/>
+        <Label Content="Flight Details" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="79" Margin="0,485,0,0" RenderTransformOrigin="0.633,2.847" FontStyle="Italic"/>
 
         <m:Map x:Name="myMap"  CredentialsProvider="cLrTP8YsCbGxhcjMkHwR~PVXJUuR0Lu3NWPwWtW8rwA~AmLYXu4s5skoNoIQ120mrtkl7RT_C2UuTd8IJc_mt5onVEMp-nn5S8Dya-FtHvbi"          
                Center="32.000454,34.870743" ZoomLevel="5.0" AnimationLevel="None" Margin="4,54,-4,118" Grid.ColumnSpan="2" >
@@ -77,13 +77,13 @@
             <TextBlock HorizontalAlignment="Center" Height="360" TextWrapping="Wrap" Text="{Binding Path=flight,StringFormat= 'now in Israel: {0}'}" VerticalAlignment="Center" Width="998"/>
         </m:Map>
         <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Center" Height="159" VerticalAlignment="Top" Width="411" Margin="0,432,0,0" Grid.RowSpan="2">
-            <TextBlock Text="{Binding Path=aircraft.registration,StringFormat='registration: {0}'}"  />
-            <TextBlock Text="{Binding Path=airline.name,StringFormat='Airline Name: {0}'}"/>
-            <TextBlock Text="{Binding Path=airport.destination.name,StringFormat= 'Airport destination: {0}'}"/>
-            <TextBlock Text="{Binding Path=airport.destination.position.country.name,StringFormat= 'Airport destination country: {0}'}"/>
-            <TextBlock Text="{Binding Path=identification.callsign,StringFormat= 'Identification.callsign: {0}'}"/>
-            <TextBlock Text="{Binding airport.origin.name,StringFormat= 'Airport Origin: {0}'}"/>
-            <TextBlock Text="{Binding airport.origin.position.country.name,StringFormat= 'Airport Origin cauntry: {0}'}"/>
+            <TextBlock Text="{Binding Path=aircraft.registration,StringFormat='registration: {0}'}" FontStyle="Italic" />
+            <TextBlock Text="{Binding Path=airline.name,StringFormat='Airline Name: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding Path=airport.destination.name,StringFormat= 'Airport destination: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding Path=airport.destination.position.country.name,StringFormat= 'Airport destination country: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding Path=identification.callsign,StringFormat= 'Identification.callsign: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding airport.origin.name,StringFormat= 'Airport Origin: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding airport.origin.position.country.name,StringFormat= 'Airport Origin cauntry: {0}'}" FontStyle="Italic"/>
             <TextBlock Text="{Binding status.text}"/>
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
@@ -91,7 +91,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding FlightCode}" />
+                        <TextBlock Text="{Binding FlightCode}" FontStyle="Italic"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -105,12 +105,12 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Label Content="Incoming" HorizontalAlignment="Left" Margin="38,431,0,0" VerticalAlignment="Top" Height="26" Width="60" Grid.Column="1"/>
-        <Label Content="Outgoing" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="227,432,0,0" Grid.Column="1"/>
+        <Label Content="Incoming flights" HorizontalAlignment="Left" Margin="67,432,0,0" VerticalAlignment="Top" Height="26" Width="138" Grid.Column="1" FontStyle="Italic"/>
+        <Label Content="Outgoing flights" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="140" Margin="260,432,0,0" Grid.Column="1" FontStyle="Italic"/>
         <StackPanel x:Name="TodayStatus" Margin="182,8,123,484" Grid.Column="1" >
             <TextBlock Text="{Binding Date}" />
             <TextBlock Text="{Binding Status}"/>
         </StackPanel>
-        <Button Command="{ Binding ShowHistory}" Content="Show History" HorizontalAlignment="Left" Height="36" Margin="343,10,0,0" VerticalAlignment="Top" Width="156"/>
+        <Button Command="{ Binding ShowHistory}" Content="Show History" HorizontalAlignment="Left" Height="25" Margin="28,21,0,0" VerticalAlignment="Top" Width="132" FontStyle="Italic"/>
     </Grid>
 </Window>

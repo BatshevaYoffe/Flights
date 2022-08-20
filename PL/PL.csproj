@@ -79,7 +79,6 @@
     <Compile Include="Model\RangeOfDatesModel.cs" />
     <Compile Include="Model\WeatherDataModel.cs" />
     <Compile Include="VM\Command\OpenDAFWindowCommand.cs" />
-    <Compile Include="VM\Command\SelectDatesCommand.cs" />
     <Compile Include="VM\Command\ShowFlightsCommand.cs" />
     <Compile Include="VM\Command\ShowWeatherCommand.cs" />
     <Compile Include="VM\Converters\TickToDateTimeConverter.cs" />

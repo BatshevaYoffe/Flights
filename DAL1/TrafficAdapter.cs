@@ -10,7 +10,7 @@ using static FlightModel.FlightInfo;
 
 namespace DAL1
 {
-    public class AsynchronicTrafficAdapter
+    public class TrafficAdapter
     {
         private const string AllURL = @"https://data-cloud.flightradar24.com/zones/fcgi/feed.js?faa=1&bounds=33.874%2C29.433%2C30.862%2C37.601&satellite=1&mlat=1&flarm=1&adsb=1&gnd=1&air=1&vehicles=1&estimated=1&maxage=14400";
         private const string FlightURL = @"https://data-live.flightradar24.com/clickhandler/?version=1.5&flight=";

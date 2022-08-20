@@ -10,32 +10,30 @@
 
 
     <Grid>
-        <DatePicker SelectedDate="{Binding Path=FromDate, Mode=TwoWay}" Name="dateFrom"   HorizontalAlignment="Left" Margin="552,83,0,0" VerticalAlignment="Top"   Height="28" Width="107"/>
-        <DatePicker SelectedDate="{Binding Path=UntilDate, Mode=TwoWay}" Name="dateUntil"  HorizontalAlignment="Left" Margin="552,139,0,0" VerticalAlignment="Top"  Height="28" Width="107"/>
-        <Button Command="{Binding SelectDates}"  Content="Select Dates" HorizontalAlignment="Left" Height="50" Margin="344,10,0,0" VerticalAlignment="Top" Width="172"/>
 
 
-        <ListBox  ItemsSource="{Binding SelectedFlights}" x:Name="SelectedFlights" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="49,35,0,0" >
+        <ListBox  ItemsSource="{Binding SelectedFlights}" x:Name="SelectedFlights" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="55,77,0,0" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                        <TextBlock Text="{Binding FlightCode}"/>
+                        <TextBlock Text="{Binding FlightCode}" FontStyle="Italic"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="158" VerticalAlignment="Top" Width="287" Margin="38,168,0,0">
-            <TextBlock Text="{Binding aircraft.registration}"/>
-            <TextBlock Text="{Binding airline.name}"/>
-            <TextBlock Text="{Binding airport.destination.name}"/>
-            <TextBlock Text="{Binding airport.destination.position.country.name}"/>
-            <TextBlock Text="{Binding identification.callsign}"/>
-            <TextBlock Text="{Binding airport.origin.name}"/>
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="91" VerticalAlignment="Top" Width="288" Margin="38,274,0,0">
+
+            <TextBlock Text="{Binding FlightCode,StringFormat='Flight number: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding Source,StringFormat= 'Source: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding Destination,StringFormat= 'Destination: {0}'}" FontStyle="Italic"/>
+            <TextBlock Text="{Binding DateTime ,StringFormat='Search date: {0}' }" FontStyle="Italic"/>
+            <!--<TextBlock Text="{Binding identification.callsign}"/>
+            
             <TextBlock Text="{Binding airport.origin.position.country.name}"/>
-            <TextBlock Text="{Binding status.text}"/>
+            <TextBlock Text="{Binding status.text}"/>-->
             <!--<TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>-->
         </StackPanel>
-        <Calendar HorizontalAlignment="Left" Margin="584,247,0,0" VerticalAlignment="Top" x:Name="Selected_Range_of_dates" SelectionMode="SingleRange" SelectedDatesChanged="selectedDates"/>
+        <Calendar HorizontalAlignment="Left" Margin="502,112,0,0" VerticalAlignment="Top" x:Name="Selected_Range_of_dates" SelectionMode="SingleRange" SelectedDatesChanged="selectedDates" Height="233" Width="259" />
 
 
 
