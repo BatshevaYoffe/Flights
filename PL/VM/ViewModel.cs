@@ -362,19 +362,18 @@ namespace PL.VM
 
 
         ///////////weather////
-        private async void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
+        private void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
         {
             if (Flight != null)
             {
-                //weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-                //weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                weather.DataContext= await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-             //   weather.DataContext = Weather;//.weather[0].description;
-            }
-          
-            ///בשביל הבינדינג של הטמפ maim.temp
-        }
 
+                //weatherRootDestinatin = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                //weatherRootSource = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+                weather.DataContext = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+
+                ///בשביל הבינדינג של הטמפ maim.temp
+            }
+        }
         private void ShowWeather()
         {
             weather.DataContext = weatherRootDestinatin.weather[0].description;

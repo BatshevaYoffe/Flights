@@ -15,7 +15,7 @@ namespace BL
         FlightInfo.Root GetDataofOneFlight(string SourceId);
         void BLSaveFlight(FlightInfoPartial flight);
         Task<string> ReturnStatusOfDate(DateTime date);
-        Task<WeatherRoot> ReturnWeatherBl(double lat, double lon);
+        WeatherRoot ReturnWeatherBl(double lat, double lon);
         List<FlightInfoPartial> GetSelectedFlightsByDates(DateTime firstDate, DateTime lastDate);
     }
 }
