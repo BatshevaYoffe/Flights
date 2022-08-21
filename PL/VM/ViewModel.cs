@@ -33,7 +33,7 @@ namespace PL.VM
         public OpenDAFWindowCommand ShowHistory { get; set; }
         public FlightInfoPartial SelectedFlight { get; set; }
         public FlightInfoPartial flight { get; private set; }
-        //public DateAndStatus todayStatus { get; set; }
+        public DateAndStatus todayStatus { get; set; }
         public WeatherRoot weatherRootDestinatin { get; set; }
         public WeatherRoot weatherRootSource { get; set; }
 
@@ -65,7 +65,6 @@ namespace PL.VM
 
             ReadAll = new ShowFlightsCommand();
             ReadAll.read += ShowAllFlights;
-
             ReadAll.read += AllFlightsOnMap;
             ReadAll.read += StartTracking;
 
@@ -79,6 +78,7 @@ namespace PL.VM
             this.todayDateStatus = todayStatus;
             this.weather = weather;
             ShowDateStatus();
+           
         }
 
 
@@ -150,52 +150,52 @@ namespace PL.VM
 
         private Style PlaneDirection(FlightInfoPartial flight)
         {
-            RotateTransform r=new RotateTransform();
+            RotateTransform r = new RotateTransform();
             Style style = new Style();
-            var s =(resources["rightAirplane"]);
+            var s = (resources["rightAirplane"]);
             // Create an Image
 
-            Image imgControl = new Image();
+            //Image imgControl = new Image();
 
 
 
-            // Create the TransformedBitmap
+            //// Create the TransformedBitmap
 
-            TransformedBitmap transformBmp = new TransformedBitmap();
-
-
-
-            // Create a BitmapImage
-
-            BitmapImage bmpImage = new BitmapImage();
-
-            bmpImage.BeginInit();
-
-            bmpImage.UriSource = new Uri(@"C:\Users\Bat7\source\repos\Flight1\DAL1\Images\airplane.png", UriKind.RelativeOrAbsolute);
-
-            bmpImage.EndInit();
+            //TransformedBitmap transformBmp = new TransformedBitmap();
 
 
 
-            // Properties must be set between BeginInit and EndInit
+            //// Create a BitmapImage
 
-            transformBmp.BeginInit();
+            //BitmapImage bmpImage = new BitmapImage();
 
-            transformBmp.Source = bmpImage;
+            //bmpImage.BeginInit();
 
-            RotateTransform transform = new RotateTransform(90);
+            //// bmpImage.UriSource = new Uri(@"C:\Users\Bat7\source\repos\Flight1\DAL1\Images\airplane.png", UriKind.RelativeOrAbsolute);
 
-            transformBmp.Transform = transform;
-
-            transformBmp.EndInit();
+            ////bmpImage.EndInit();
 
 
 
-            // Set Image.Source to TransformedBitmap
+            //// Properties must be set between BeginInit and EndInit
 
-            imgControl.Source = transformBmp;
-            resources["rightAirplane"] = imgControl;
-           // return (Style)resources["rightAirplane"];
+            //transformBmp.BeginInit();
+
+            //transformBmp.Source = bmpImage;
+
+            //RotateTransform transform = new RotateTransform(90);
+
+            //transformBmp.Transform = transform;
+
+            //transformBmp.EndInit();
+
+
+
+            //// Set Image.Source to TransformedBitmap
+
+            //imgControl.Source = transformBmp;
+            //resources["rightAirplane"] = imgControl;
+            //// return (Style)resources["rightAirplane"];
 
 
             if ((flight.Destination == "TLV" && flight.Lat < 34.885857389453754) || (flight.Destination != "TLV" && flight.Lat > 34.885857389453754))
@@ -265,7 +265,7 @@ namespace PL.VM
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
             SaveWeathetAtSourceAndDestination(Flight);
-
+            //weather.DataContext = weatherRootDestinatin;
             detailsPanel.DataContext = Flight;
 
             // Update map
@@ -362,23 +362,23 @@ namespace PL.VM
 
 
         ///////////weather////
-        private async void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
+        public  void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
         {
             if (Flight != null)
             {
                 //weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-                //weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                weather.DataContext= await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-             //   weather.DataContext = Weather;//.weather[0].description;
+               //weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+                weather.DataContext= WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+ 
             }
           
             ///בשביל הבינדינג של הטמפ maim.temp
         }
 
-        private void ShowWeather()
-        {
-            weather.DataContext = weatherRootDestinatin.weather[0].description;
-        }
+        //private void ShowWeather()
+        //{
+        //    weather.DataContext = weatherRootDestinatin.weather[0].description;
+        //}
 
         public void BindingShowHistory()
         {

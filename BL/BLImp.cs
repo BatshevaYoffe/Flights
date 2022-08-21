@@ -14,7 +14,7 @@ namespace BL
     {
         TrafficAdapter TrafficAdapter = new TrafficAdapter();
         AsynchronicHebCal asynchronicHebCal = new AsynchronicHebCal();
-        AsynchroinicWheaterData asynchroinicWheaterData = new AsynchroinicWheaterData();
+        WheaterData WheaterData = new WheaterData();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
             var FlightKeys = TrafficAdapter.GetCurrentFlights();
@@ -66,16 +66,16 @@ namespace BL
             string status = await asynchronicHebCal.GetStatusOfDate(date);
             return status;
         }
-        public async Task<WeatherRoot> ReturnWeatherBl(double lat, double lon)
+        public WeatherRoot ReturnWeatherBl(double lat, double lon)
         {
-            WeatherRoot weatherRoot = await asynchroinicWheaterData.RetuenWeatherData(lat, lon);
+            WeatherRoot weatherRoot = WheaterData.RetuenWeatherData(lat, lon);
             return weatherRoot;
         }
         public List<FlightInfoPartial> GetSelectedFlightsByDates(DateTime firstDate, DateTime lastDate)
         {
             ConectionToTheDataBase conectionToDB = new ConectionToTheDataBase();
             var flights = conectionToDB.ReturnFlightsByDates(firstDate, lastDate);
-                return flights;
+            return flights;
 
         }
     }
