@@ -82,9 +82,10 @@ namespace DAL1
 
             using (var webClient = new System.Net.WebClient())
             {
-                var json = webClient.DownloadString(CuurentUrl);
                 try
                 {
+                    var json = webClient.DownloadString(CuurentUrl);
+
                     CurrentFlight = (Root)Newtonsoft.Json.JsonConvert.DeserializeObject(json, typeof(Root));
                 }
                 catch (Exception e)

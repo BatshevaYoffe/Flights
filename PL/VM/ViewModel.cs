@@ -20,6 +20,9 @@ using System.Windows.Threading;
 using static FlightModel.FlightInfo;
 using System.Windows.Media.Media3D;
 using System.Windows.Media.Imaging;
+using System.Windows.Forms;
+using Nest;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace PL.VM
 {
@@ -38,7 +41,6 @@ namespace PL.VM
         public WeatherRoot weatherRootSource { get; set; }
 
         public WeatherRoot Weather { get; set; }
-
 
 
         private HebCalModel hebCalModel;
@@ -194,6 +196,7 @@ namespace PL.VM
             // Set Image.Source to TransformedBitmap
 
             imgControl.Source = transformBmp;
+
             resources["rightAirplane"] = imgControl;
            // return (Style)resources["rightAirplane"];
 
@@ -234,7 +237,12 @@ namespace PL.VM
         }
         public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
         {
+            if(sourceId == null)
+            {
+                return null;
+            }
             FlightInfo.Root Flight = FIRModel.GetDataOfFlightFromModel(sourceId);
+            if(Flight == null) { return null; }
             List<FlightInfo.Trail> OrderedPlaces = (from f in Flight.trail
                                                     orderby f.ts
                                                     select f).ToList<FlightInfo.Trail>();
@@ -370,6 +378,7 @@ namespace PL.VM
                 
                 //weatherRootDestinatin = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 //weatherRootSource = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+                //var t = weatherRootDestinatin.weather[0].description;
                 weather.DataContext =  WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 ///בשביל הבינדינג של הטמפ maim.temp
                
@@ -383,8 +392,12 @@ namespace PL.VM
 
         public void BindingShowHistory()
         {
-            DatesAndFlightsWindow DAF=new DatesAndFlightsWindow();
-            DAF.Show(); 
+            //UserControl1 userControl1 = new UserControl1();
+            //Grid.SetColumn(userControl1, 1);
+            //Grid.SetRow(userControl1, 1);
+
+             DatesAndFlightsWindow DAF=new DatesAndFlightsWindow();
+            // DAF.ShowDialog(); 
 
         }
     }

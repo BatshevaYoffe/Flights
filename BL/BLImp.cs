@@ -23,7 +23,7 @@ namespace BL
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Outgoing"])
                 {
-                    if (flight.FlightCode != "" || flight.Destination != "" || flight.Source == "")
+                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")
                         //FlightKeys["Outgoing"].Remove(flight);
                         outGoingFlights.Add(flight);
 
@@ -39,12 +39,13 @@ namespace BL
         public List<FlightInfoPartial> GetCurrentInComingFlights()
         {
             var FlightKeys = TrafficAdapter.GetCurrentFlights();
+            List<FlightInfoPartial>incomingFlights=new List<FlightInfoPartial>();
             try
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Incoming"])
                 {
-                    if (flight.FlightCode == "" || flight.Destination == "" || flight.Source == "")
-                        FlightKeys["Incoming"].Remove(flight);
+                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")
+                        incomingFlights.Add(flight);
 
                 }
             }
@@ -52,7 +53,7 @@ namespace BL
             {
                 Debug.Print(e.Message);
             }
-            return FlightKeys["Incoming"];
+            return incomingFlights;
         }
         public FlightInfo.Root GetDataofOneFlight(string SourceId)
         {
