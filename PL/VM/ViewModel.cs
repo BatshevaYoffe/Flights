@@ -33,7 +33,7 @@ namespace PL.VM
         public OpenDAFWindowCommand ShowHistory { get; set; }
         public FlightInfoPartial SelectedFlight { get; set; }
         public FlightInfoPartial flight { get; private set; }
-        public DateAndStatus todayStatus { get; set; }
+        //public DateAndStatus todayStatus { get; set; }
         public WeatherRoot weatherRootDestinatin { get; set; }
         public WeatherRoot weatherRootSource { get; set; }
 
@@ -51,8 +51,7 @@ namespace PL.VM
         private StackPanel todayDateStatus;
         private StackPanel weather;
 
-        //private StackPanel Weather;;
-
+        
 
 
         public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel, StackPanel todayStatus,StackPanel weather)
@@ -367,9 +366,9 @@ namespace PL.VM
         {
             if (Flight != null)
             {
-                weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-                weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                Weather.DataContex= await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                //weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                //weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+                weather.DataContext= await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
              //   weather.DataContext = Weather;//.weather[0].description;
             }
           
