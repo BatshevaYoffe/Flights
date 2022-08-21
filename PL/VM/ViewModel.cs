@@ -264,7 +264,7 @@ namespace PL.VM
             }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
-            SaveWeathetAtSourceAndDestination(Flight);
+             SaveWeathetAtSourceAndDestination(Flight);
 
             detailsPanel.DataContext = Flight;
 
@@ -370,10 +370,11 @@ namespace PL.VM
                 
                 //weatherRootDestinatin = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 //weatherRootSource = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                weather.DataContext = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                weather.DataContext =  WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 ///בשביל הבינדינג של הטמפ maim.temp
-                //ShowWeather();
+               
             }
+            
         }
         private void ShowWeather()
         {

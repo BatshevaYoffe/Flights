@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsynchronicHebCal.cs" />
+    <Compile Include="AsynchronicWeatherData.cs" />
     <Compile Include="ConectionToTheDataBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

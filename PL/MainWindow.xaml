@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-        Title="Flights by Naama and Batsheva" Height="622" Width="998" Icon="C:\Users\Bat7\source\repos\Flight1\DAL1\Images\airplane.png">
+        Title="Flights by Naama and Batsheva" Height="622" Width="998" >
     <Window.Resources>
         <Style TargetType="{x:Type m:Pushpin}" x:Key="rightAirplane">
             <Setter Property="Template">

@@ -14,7 +14,7 @@ namespace BL
     {
         TrafficAdapter TrafficAdapter = new TrafficAdapter();
         AsynchronicHebCal asynchronicHebCal = new AsynchronicHebCal();
-        WheaterData WheaterData = new WheaterData();
+         WheaterData WeatherData = new WheaterData();
         public List<FlightInfoPartial> GetCurrentOutGoingFlights()
         {
             var FlightKeys = TrafficAdapter.GetCurrentFlights();
@@ -70,9 +70,10 @@ namespace BL
         }
         public WeatherRoot ReturnWeatherBl(double lat, double lon)
         {
-            WeatherRoot weatherRoot =WheaterData.RetuenWeatherData(lat, lon);
+            WeatherRoot weatherRoot = WheaterData.RetuenWeatherData(lat, lon);
             return weatherRoot;
         }
+
         public List<FlightInfoPartial> GetSelectedFlightsByDates(DateTime firstDate, DateTime lastDate)
         {
             ConectionToTheDataBase conectionToDB = new ConectionToTheDataBase();

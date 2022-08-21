@@ -17,5 +17,6 @@ namespace BL
         Task<string> ReturnStatusOfDate(DateTime date);
         WeatherRoot ReturnWeatherBl(double lat, double lon);
         List<FlightInfoPartial> GetSelectedFlightsByDates(DateTime firstDate, DateTime lastDate);
+        
     }
 }
