@@ -340,6 +340,7 @@ namespace PL.VM
 
             myMap.Children.Add(polyline);
         }
+       
         private void StartTracking()
         {
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -366,12 +367,12 @@ namespace PL.VM
         {
             if (Flight != null)
             {
-
+                
                 //weatherRootDestinatin = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 //weatherRootSource = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
                 weather.DataContext = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-
                 ///בשביל הבינדינג של הטמפ maim.temp
+                //ShowWeather();
             }
         }
         private void ShowWeather()

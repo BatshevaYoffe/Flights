@@ -89,12 +89,8 @@
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
         <StackPanel x:Name="Weather" HorizontalAlignment="Left" Height="93" VerticalAlignment="Top" Width="75" Margin="502,459,0,0" Grid.RowSpan="2">
-
             <TextBlock Text="{Binding Path=main.temp}"/>
             <TextBlock Text="{Binding Path=wind.speed}"/>
-
-            <TextBlock Text="{Binding Path=Weather.weather[0].description,StringFormat='Weather: {0}'}"/>
-
         </StackPanel>
         <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="224,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
             <ListBox.ItemTemplate>
