@@ -38,7 +38,7 @@ namespace DAL1
                         var key = item.Key;
                         if (key == "full_count") continue;
                         if (key == "version") continue;
-                        if (item.Value[11].ToString() == "TLV") Outgoing.Add(new FlightInfoPartial
+                        if (item.Value[11].ToString() == "TLV" ) Outgoing.Add(new FlightInfoPartial
                         {
                             Id = -1,//
                             Source = item.Value[11].ToString(),

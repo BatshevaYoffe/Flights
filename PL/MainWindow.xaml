@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:converters="clr-namespace:PL.VM.Converters" xmlns:system="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:PL.VM" d:DataContext="{d:DesignInstance Type=vm:ViewModel}"
         mc:Ignorable="d"
-        Title="Flights by Naama and Batsheva" Height="622" Width="998" >
+        Title="Flights by Naama and Batsheva" Height="622" Width="998" Icon="C:\Users\Bat7\source\repos\Flight1\DAL1\Images\airplane.png">
     <Window.Resources>
         <Style TargetType="{x:Type m:Pushpin}" x:Key="rightAirplane">
             <Setter Property="Template">
@@ -77,7 +77,7 @@
             <TextBlock HorizontalAlignment="Center" Height="360" TextWrapping="Wrap" Text="{Binding Path=flight,StringFormat= 'now in Israel: {0}'}" VerticalAlignment="Center" Width="998"/>
         </m:Map>
         <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Center" Height="146" VerticalAlignment="Top" Width="198" Margin="0,445,0,0" Grid.RowSpan="2">
-            <TextBlock Text="{Binding Path=weatherRootDestinatin.main.temp,StringFormat='Weather: {0}'}"/>
+            <TextBlock Text="{Binding Path=weatherRootDestinatin.weather[0].description,StringFormat='Weather: {0}'}"/>
             <TextBlock Text="{Binding Path=aircraft.registration,StringFormat='registration: {0}'}" FontStyle="Italic" />
             <TextBlock Text="{Binding Path=airline.name,StringFormat='Airline Name: {0}'}" FontStyle="Italic"/>
             <TextBlock Text="{Binding Path=airport.destination.name,StringFormat= 'Airport destination: {0}'}" FontStyle="Italic"/>
@@ -89,7 +89,7 @@
             <TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>
         </StackPanel>
         <StackPanel x:Name="Weather" HorizontalAlignment="Left" Height="93" VerticalAlignment="Top" Width="75" Margin="502,459,0,0" Grid.RowSpan="2">
-            <TextBlock Text="{Binding }"/>
+            <TextBlock Text="{Binding Path=Weather.weather[0].description,StringFormat='Weather: {0}'}"/>
         </StackPanel>
         <ListBox ItemsSource="{Binding OutGoingFlights}" x:Name="OutFlightsListBox" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="224,457,0,0" Grid.RowSpan="2" Grid.Column="1" >
             <ListBox.ItemTemplate>
