@@ -70,7 +70,7 @@ namespace BL
         }
         public WeatherRoot ReturnWeatherBl(double lat, double lon)
         {
-            WeatherRoot weatherRoot = WheaterData.RetuenWeatherData(lat, lon);
+            WeatherRoot weatherRoot = WeatherData.RetuenWeatherData(lat, lon);
             return weatherRoot;
         }
 
