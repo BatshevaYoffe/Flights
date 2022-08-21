@@ -369,8 +369,8 @@ namespace PL.VM
             {
                 weatherRootDestinatin = await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
                 weatherRootSource = await WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                Weather=weatherRootDestinatin;
-                weather.DataContext = Weather;//.weather[0].description;
+                Weather.DataContex= await WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+             //   weather.DataContext = Weather;//.weather[0].description;
             }
           
             ///בשביל הבינדינג של הטמפ maim.temp
