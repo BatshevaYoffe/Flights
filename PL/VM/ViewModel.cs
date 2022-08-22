@@ -108,7 +108,7 @@ namespace PL.VM
             if (Flight != null)
             {
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                if (OrderedPlaces != null)
+                if (OrderedPlaces.Count >0)
                 {
                     if (SelectedFlight != null && selected.SourceId == SelectedFlight.SourceId)
                     {
@@ -167,7 +167,7 @@ namespace PL.VM
 
         public void ShowAllFlights()
         {
-            if (OutGoingFlights.Count > 0)
+            if (OutGoingFlights.Count > 0||InComingFlights.Count>0)
             {
                 FIPModel.RefreshListsOfFlights();
                 OutGoingFlights.Clear();
@@ -190,10 +190,10 @@ namespace PL.VM
         {
             if(sourceId == null)
             {
-                return null;
+                return new List<FlightInfo.Trail>();
             }
             FlightInfo.Root Flight = FIRModel.GetDataOfFlightFromModel(sourceId);
-            if(Flight == null) { return null; }
+            if(Flight == null) { return new List<FlightInfo.Trail>(); }
             List<FlightInfo.Trail> OrderedPlaces = (from f in Flight.trail
                                                     orderby f.ts
                                                     select f).ToList<FlightInfo.Trail>();
@@ -232,7 +232,7 @@ namespace PL.VM
             {
 
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-               // if (OrderedPlaces != null)
+                if (OrderedPlaces.Count>0)
                 {
                     addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
 
@@ -292,7 +292,7 @@ namespace PL.VM
         {
             myMap.Children.Clear();
             AllFlightsOnMap();
-            ShowAllFlights();
+            //ShowAllFlights();
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
 

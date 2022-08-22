@@ -10,7 +10,6 @@ namespace DAL1
 {
     public class AsynchronicHebCal
     {
-
         public async Task<string> GetStatusOfDate(DateTime date)
         {
             for (int i = 0; i <=7; i++)
@@ -31,9 +30,6 @@ namespace DAL1
                 }
             }
             return null;
-
         }
-       
-
     }
 }

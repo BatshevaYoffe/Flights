@@ -89,7 +89,7 @@
             <TextBlock Text="Origin weather:" FontWeight="Bold"/>
             <TextBlock Text="{Binding Path=main.temp}"/>
         </StackPanel>
-        <StackPanel x:Name="Weather2" HorizontalAlignment="Left" Height="59" VerticalAlignment="Top" Width="114" Margin="283,0,0,0" Grid.Column="1" Grid.Row="2">
+        <StackPanel x:Name="Weather2" HorizontalAlignment="Left" Height="59" VerticalAlignment="Top" Width="130" Margin="267,0,0,0" Grid.Column="1" Grid.Row="2">
             <TextBlock Text="Destination weather:" FontWeight="Bold"></TextBlock>
             <TextBlock Text="{Binding Path=main.temp}"/>
             <!-- <TextBlock Text="{Binding Path=wind.speed}"/>-->

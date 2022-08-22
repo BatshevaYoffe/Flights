@@ -23,7 +23,7 @@ namespace BL
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Outgoing"])
                 {
-                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")
+                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "" )//&& GetDataofOneFlight(flight.SourceId) != null)
                         //FlightKeys["Outgoing"].Remove(flight);
                         outGoingFlights.Add(flight);
                 }
@@ -43,9 +43,9 @@ namespace BL
             {
                 foreach (FlightInfoPartial flight in FlightKeys["Incoming"])
                 {
-                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")
+                    if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")//&& GetDataofOneFlight(flight.SourceId)!=null)
                         incomingFlights.Add(flight);
-
+                    
                 }
             }
             catch (Exception e)
