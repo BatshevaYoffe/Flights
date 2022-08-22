@@ -26,7 +26,6 @@ namespace BL
                     if (flight.FlightCode != "" && flight.Destination != "" && flight.Source != "")
                         //FlightKeys["Outgoing"].Remove(flight);
                         outGoingFlights.Add(flight);
-
                 }
             }
             catch (Exception e)

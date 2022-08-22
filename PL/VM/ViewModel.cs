@@ -23,6 +23,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Forms;
 using Nest;
 using MessageBox = System.Windows.Forms.MessageBox;
+using System.Windows.Controls.Primitives;
+using System.Windows.Shapes;
 
 namespace PL.VM
 {
@@ -41,7 +43,7 @@ namespace PL.VM
         public WeatherRoot weatherRootSource { get; set; }
 
         public WeatherRoot Weather { get; set; }
-
+        public WeatherRoot Weather2 { get; set; }
 
         private HebCalModel hebCalModel;
         private FlightInfoPartialModel FIPModel;
@@ -52,11 +54,11 @@ namespace PL.VM
         private StackPanel detailsPanel;
         private StackPanel todayDateStatus;
         private StackPanel weather;
-
+        private StackPanel weather2;
         
 
 
-        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel, StackPanel todayStatus,StackPanel weather)
+        public ViewModel(Map myMap, ResourceDictionary resources, StackPanel detailsPanel, StackPanel todayStatus,StackPanel weather,StackPanel weather2)
         {
             hebCalModel = new HebCalModel();
             FIPModel = new FlightInfoPartialModel();
@@ -74,23 +76,22 @@ namespace PL.VM
             ShowHistory = new OpenDAFWindowCommand();
             ShowHistory.read += BindingShowHistory;
 
-
             this.myMap = myMap;
             this.resources = resources;
             this.detailsPanel = detailsPanel;
             this.todayDateStatus = todayStatus;
             this.weather = weather;
+            this.weather2 = weather2;
             ShowDateStatus();
         }
-
 
         public async void ShowDateStatus()
         {
             todayDateStatus.DataContext = await hebCalModel.ReturnStatusOfDate(DateTime.Today);
         }
+
         private void AllFlightsOnMap()
         {
-           
             foreach (FlightInfoPartial flight in InComingFlights)
             {
                 AddFlightToMap(flight);
@@ -99,7 +100,6 @@ namespace PL.VM
             {
                 AddFlightToMap(flight);
             }
-
         }
 
         private void AddFlightToMap(FlightInfoPartial selected)
@@ -108,99 +108,44 @@ namespace PL.VM
             if (Flight != null)
             {
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                if (SelectedFlight != null && selected.SourceId == SelectedFlight.SourceId)
+                if (OrderedPlaces != null)
                 {
-                    addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
+                    if (SelectedFlight != null && selected.SourceId == SelectedFlight.SourceId)
+                    {
+                        addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
+                    }
+                    else
+                    {
+                        addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Blue);
 
+                    }
+                    Trail CurrentPlace = null;
+
+                    Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
+                    Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
+
+                    PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
+                    MapLayer.SetPositionOrigin(PinCurrent, origin);
+
+                    PinCurrent.Style = PlaneDirection(selected, "rightAirplane");
+                    //Better to use RenderTransform
+
+                    CurrentPlace = OrderedPlaces.Last<Trail>();
+                    var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
+                    PinCurrent.Location = PlaneLocation;
+
+                    CurrentPlace = OrderedPlaces.First<Trail>();
+                    PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
+                    PinOrigin.Location = PlaneLocation;
+
+                    myMap.Children.Add(PinOrigin);
+                    myMap.Children.Add(PinCurrent);
                 }
-                else
-                {
-                    addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Blue);
-
-                }
-
-                //MessageBox.Show(Flight.airport.destination.code.iata);
-                Trail CurrentPlace = null;
-
-                Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
-                Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
-
-                PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
-                MapLayer.SetPositionOrigin(PinCurrent, origin);
-
-                PinCurrent.Style = PlaneDirection(selected);
-                //Better to use RenderTransform
-
-
-                CurrentPlace = OrderedPlaces.Last<Trail>();
-                var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinCurrent.Location = PlaneLocation;
-
-
-                CurrentPlace = OrderedPlaces.First<Trail>();
-                PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinOrigin.Location = PlaneLocation;
-
-                //PinCurrent.MouseDown += Pin_MouseDown;
-
-                myMap.Children.Add(PinOrigin);
-                myMap.Children.Add(PinCurrent);
             }
-
-
         }
 
-        private Style PlaneDirection(FlightInfoPartial flight)
+        private Style PlaneDirection(FlightInfoPartial flight, string v)
         {
-            RotateTransform r=new RotateTransform();
-            Style style = new Style();
-            var s =(resources["rightAirplane"]);
-            // Create an Image
-
-            Image imgControl = new Image();
-
-
-
-            // Create the TransformedBitmap
-
-            TransformedBitmap transformBmp = new TransformedBitmap();
-
-
-
-            // Create a BitmapImage
-
-            BitmapImage bmpImage = new BitmapImage();
-
-            bmpImage.BeginInit();
-
-            bmpImage.UriSource = new Uri(@"C:\Users\Bat7\source\repos\Flight1\DAL1\Images\airplane.png", UriKind.RelativeOrAbsolute);
-
-            bmpImage.EndInit();
-
-
-
-            // Properties must be set between BeginInit and EndInit
-
-            transformBmp.BeginInit();
-
-            transformBmp.Source = bmpImage;
-
-            RotateTransform transform = new RotateTransform(90);
-
-            transformBmp.Transform = transform;
-
-            transformBmp.EndInit();
-
-
-
-            // Set Image.Source to TransformedBitmap
-
-            imgControl.Source = transformBmp;
-
-            resources["rightAirplane"] = imgControl;
-           // return (Style)resources["rightAirplane"];
-
-
             if ((flight.Destination == "TLV" && flight.Lat < 34.885857389453754) || (flight.Destination != "TLV" && flight.Lat > 34.885857389453754))
             {
                 return ((Style)(resources["ToIsrael"]));
@@ -210,7 +155,14 @@ namespace PL.VM
 
                 return (Style)resources["FromIsrael"];
             }
+        }
 
+        public Image getRotatedImage(Image img, float angle)
+        {
+            //Code here to rotate the image
+            RotateTransform rotateTransform = new RotateTransform(angle);
+            img.RenderTransform = rotateTransform;
+            return img;
         }
 
         public void ShowAllFlights()
@@ -226,15 +178,14 @@ namespace PL.VM
 
             foreach (FlightInfoPartial flight in FIPModel.OutGoingflights)
                 OutGoingFlights.Add(flight);
-
         }
-
 
         public FlightInfo.Root VmGetFlightData(string sourceId)
         {
             FlightInfo.Root Flight = FIRModel.GetDataOfFlightFromModel(sourceId);
             return Flight;
         }
+
         public List<FlightInfo.Trail> OrderPlacesOfFlight(string sourceId)
         {
             if(sourceId == null)
@@ -249,6 +200,7 @@ namespace PL.VM
 
             return OrderedPlaces;
         }
+        
         public void SaveFlightInDB(FlightInfoPartial flight)
         {
             FIPModel.save(flight);
@@ -268,11 +220,10 @@ namespace PL.VM
             if (PreviousChoice != null)
             {
                 AddFlightToMap(PreviousChoice);
-
             }
             var Flight = VmGetFlightData(selected.SourceId);
             SaveFlightInDB(selected);
-             SaveWeathetAtSourceAndDestination(Flight);
+            SaveWeathetAtSourceAndDestination(Flight);
 
             detailsPanel.DataContext = Flight;
 
@@ -281,72 +232,52 @@ namespace PL.VM
             {
 
                 List<FlightInfo.Trail> OrderedPlaces = OrderPlacesOfFlight(selected.SourceId);
-                addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
-
-                //MessageBox.Show(Flight.airport.destination.code.iata);
-                Trail CurrentPlace = null;
-
-                Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
-                Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
-                // Pushpin PinDestination = new Pushpin { ToolTip = Flight.airport.origin.name };
-
-
-                PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
-                MapLayer.SetPositionOrigin(PinCurrent, origin);
-
-
-                //Better to use RenderTransform
-                if (Flight.airport.destination.code.iata == "TLV")
+               // if (OrderedPlaces != null)
                 {
-                    PinCurrent.Style = (Style)resources["ToIsrael"];
+                    addNewPolyLine(OrderedPlaces, System.Windows.Media.Colors.Red);
+
+                    //MessageBox.Show(Flight.airport.destination.code.iata);
+                    Trail CurrentPlace = null;
+
+                    Pushpin PinCurrent = new Pushpin { ToolTip = selected.FlightCode };
+                    Pushpin PinOrigin = new Pushpin { ToolTip = Flight.airport.origin.name };
+
+                    PositionOrigin origin = new PositionOrigin { X = 0.4, Y = 0.4 };
+                    MapLayer.SetPositionOrigin(PinCurrent, origin);
+
+                    PinCurrent.Style = PlaneDirection(selected, "rightAirplane");
+
+                    CurrentPlace = OrderedPlaces.Last<Trail>();
+                    var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
+                    PinCurrent.Location = PlaneLocation;
+
+
+                    CurrentPlace = OrderedPlaces.First<Trail>();
+                    PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
+                    PinOrigin.Location = PlaneLocation;
+
+                    myMap.Children.Add(PinOrigin);
+                    myMap.Children.Add(PinCurrent);
                 }
-                else
-                {
-                    PinCurrent.Style = (Style)resources["FromIsrael"];
-                }
-
-                CurrentPlace = OrderedPlaces.Last<Trail>();
-                var PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinCurrent.Location = PlaneLocation;
-
-
-                CurrentPlace = OrderedPlaces.First<Trail>();
-                PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                PinOrigin.Location = PlaneLocation;
-
-                //CurrentPlace = OrderedPlaces.First<Trail>();
-                //PlaneLocation = new Location { Latitude = CurrentPlace.lat, Longitude = CurrentPlace.lng };
-                // PinDestination.Location = PlaneLocation;
-
-                //PinCurrent.MouseDown += Pin_MouseDown;
-
-                myMap.Children.Add(PinOrigin);
-                myMap.Children.Add(PinCurrent);
-                // myMap.Children.Add(PinDestination);
-
             }
         }
 
 
         void addNewPolyLine(List<Trail> Route, Color color)
         {
-            MapPolyline polyline = new MapPolyline();
-            //polyline.Fill = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Blue);
-            polyline.Stroke = new System.Windows.Media.SolidColorBrush(color);
-            polyline.StrokeThickness = 1;
-            polyline.Opacity = 0.7;
-            polyline.Locations = new LocationCollection();
-            foreach (var item in Route)
+           // if (Route!=null)
             {
-                polyline.Locations.Add(new Location(item.lat, item.lng));
+                MapPolyline polyline = new MapPolyline();
+                polyline.Stroke = new System.Windows.Media.SolidColorBrush(color);
+                polyline.StrokeThickness = 1;
+                polyline.Opacity = 0.7;
+                polyline.Locations = new LocationCollection();
+                foreach (var item in Route)
+                {
+                    polyline.Locations.Add(new Location(item.lat, item.lng));
+                }
+                myMap.Children.Add(polyline);
             }
-            //if (color == System.Windows.Media.Colors.Green)
-            //{
-            //    //myMap.Children.Remove(polyline);
-            //}
-
-
-            myMap.Children.Add(polyline);
         }
        
         private void StartTracking()
@@ -365,25 +296,24 @@ namespace PL.VM
             //Counter.Text = (Convert.ToInt32(Counter.Text) + 1).ToString();
         }
 
-
-
-
-
-
         ///////////weather////
         private void SaveWeathetAtSourceAndDestination(FlightInfo.Root Flight)
         {
             if (Flight != null)
             {
-                
-                //weatherRootDestinatin = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
-                //weatherRootSource = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
-                //var t = weatherRootDestinatin.weather[0].description;
-                weather.DataContext =  WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                if (Flight.airport.destination.code.iata == "TLV")
+                {
+                    weather.DataContext = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                    weather2.DataContext = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+                }
+                else
+                {
+                    weather2.DataContext = WDModel.GetWeather(Flight.airport.destination.position.latitude, Flight.airport.destination.position.longitude);
+                    weather.DataContext = WDModel.GetWeather(Flight.airport.origin.position.latitude, Flight.airport.origin.position.longitude);
+
+                }
                 ///בשביל הבינדינג של הטמפ maim.temp
-               
             }
-            
         }
         private void ShowWeather()
         {
@@ -392,13 +322,8 @@ namespace PL.VM
 
         public void BindingShowHistory()
         {
-            //UserControl1 userControl1 = new UserControl1();
-            //Grid.SetColumn(userControl1, 1);
-            //Grid.SetRow(userControl1, 1);
-
              DatesAndFlightsWindow DAF=new DatesAndFlightsWindow();
-            // DAF.ShowDialog(); 
-
+             DAF.ShowDialog(); 
         }
     }
 }

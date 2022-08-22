@@ -5,12 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DatesAndFlightsWindow" Height="450" Width="800">
-
-
-
+        Title="DatesAndFlightsWindow" Height="400" Width="800" Icon="/header__logo-icon.png">
     <Grid>
-        <ListBox  ItemsSource="{Binding SelectedFlights}" x:Name="SelectedFlights" HorizontalAlignment="Left" Height="112" VerticalAlignment="Top" Width="176" SelectionChanged="FlightsListBox_SelectionChanged" Background="{x:Null}" Margin="55,77,0,0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="/header__logo-icon.png"/>
+        </Grid.Background>
+        
+        <ListBox  ItemsSource="{Binding SelectedFlights}" HorizontalAlignment="Left" Height="252" VerticalAlignment="Top" Width="98" SelectionChanged="FlightsListBox_SelectionChanged" Background="#FF283273" Grid.Column="1" Margin="78,2,0,0" Grid.Row="1" Foreground="#FFF3E4E4" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -19,19 +30,16 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="91" VerticalAlignment="Top" Width="288" Margin="38,274,0,0">
+        <StackPanel x:Name="DetailsPanel" HorizontalAlignment="Left" Height="92" VerticalAlignment="Top" Width="246" Margin="266,82,0,0" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" Background="#FF283273">
+            <TextBlock Text="{Binding FlightCode,StringFormat='Flight number: {0}'}" FontStyle="Italic" Foreground="White"/>
+            <TextBlock Text="{Binding Source,StringFormat= 'Source: {0}'}" FontStyle="Italic" Foreground="White"/>
+            <TextBlock Text="{Binding Destination,StringFormat= 'Destination: {0}'}" FontStyle="Italic" Foreground="White"/>
+            <TextBlock Text="{Binding DateTime ,StringFormat='Search date: {0}' }" FontStyle="Italic" Foreground="White" />
+         </StackPanel>
 
-            <TextBlock Text="{Binding FlightCode,StringFormat='Flight number: {0}'}" FontStyle="Italic"/>
-            <TextBlock Text="{Binding Source,StringFormat= 'Source: {0}'}" FontStyle="Italic"/>
-            <TextBlock Text="{Binding Destination,StringFormat= 'Destination: {0}'}" FontStyle="Italic"/>
-            <TextBlock Text="{Binding DateTime ,StringFormat='Search date: {0}' }" FontStyle="Italic"/>
-            <!--<TextBlock Text="{Binding identification.callsign}"/>
-            
-            <TextBlock Text="{Binding airport.origin.position.country.name}"/>
-            <TextBlock Text="{Binding status.text}"/>-->
-            <!--<TextBlock Text="{Binding time.estimated.arrival, Converter={StaticResource TickConvert}}"/>-->
-        </StackPanel>
-        <Calendar HorizontalAlignment="Left" Margin="502,112,0,0" VerticalAlignment="Top" x:Name="Selected_Range_of_dates" SelectionMode="SingleRange" SelectedDatesChanged="selectedDates" Height="233" Width="259" />
+        <Calendar HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="Selected_Range_of_dates" SelectionMode="SingleRange" SelectedDatesChanged="selectedDates" Height="208" Width="222" Margin="19,38,0,0" Grid.Row="1" />
+        <TextBlock Text="Select a date range:" FontFamily="Italic" FontSize="30" HorizontalAlignment="Center" Margin="0,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="106" Width="178" Grid.RowSpan="2" FontStyle="Italic" Foreground="#FFF18643"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="99,18,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
 
 
 
