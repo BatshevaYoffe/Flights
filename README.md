@@ -10,5 +10,5 @@ MVVM Backend Architecture: Implemented the MVVM architecture for well-organized 
 
 Search Functionality Implementation: Enabled precise search functionalities within flight history, empowering users to retrieve specific flight data, streamlining the overall user experience.
 
-Front-end Utilization: Integrated command structures, Micro Frontends, and user controls for efficient and responsive front-end functionality, enhancing user interactions and overall application usability.
+Front-end Utilization: Integrated Command classes, Micro Frontends, and user controls for efficient and responsive front-end functionality, enhancing user interactions and overall application usability.
 
